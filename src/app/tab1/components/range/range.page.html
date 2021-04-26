@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title style="text-transform: capitalize;">range</ion-title>
+  </ion-toolbar>
+  </ion-header>
+
+<ion-content>
+
+  <ion-list-header>
+    Adjust Display
+  </ion-list-header>
+
+  <ion-list>
+
+
+    <ion-item>
+      <ion-range min="20" max="80" >
+        <ion-icon size="small" slot="start" name="sunny"></ion-icon>
+        <ion-icon slot="end" name="sunny"></ion-icon>
+      </ion-range>
+    </ion-item>
+    
+    <ion-item>
+      <ion-range color="secondary" min="20" max="80" pin="true">
+        <ion-icon size="small" slot="start" name="contrast-sharp"></ion-icon>
+        <ion-icon slot="end" name="contrast-sharp"></ion-icon>
+      </ion-range>
+    </ion-item>
+
+    <ion-item>
+      <ion-range dualKnobs="true" color="dark" min="20" max="80" pin="true">
+        <ion-icon size="small" slot="start" name="brush-sharp"></ion-icon>
+        <ion-icon slot="end" name="brush-sharp"></ion-icon>
+      </ion-range>
+    </ion-item>
+
+
+    <ion-item>
+      <ion-range color="danger" min="20" max="80" step="4" snaps="true" ></ion-range>
+      <ion-icon color="danger" size="small" slot="start" name="thermometer-sharp"></ion-icon>
+      <ion-icon color="danger" slot="end" name="thermometer-sharp"></ion-icon>
+    </ion-item>
+  
+
+  </ion-list>
+
+</ion-content>

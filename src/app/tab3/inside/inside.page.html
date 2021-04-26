@@ -1,0 +1,70 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title style="text-transform: capitalize;">Inside Page</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-list>
+    <ion-item>
+      <ion-label>BlueBerry</ion-label>
+      <ion-toggle checked="true" slot="end" color="primary"> </ion-toggle>
+    </ion-item>
+    <ion-item>
+      <ion-label>Apple</ion-label>
+      <ion-toggle checked="true" slot="end" color="secondary"> </ion-toggle>
+    </ion-item>
+    <ion-item>
+      <ion-label>Grape</ion-label>
+      <ion-toggle checked="true" slot="end" color="tertiary"> </ion-toggle>
+    </ion-item>
+    <ion-item>
+      <ion-label>Kiwi</ion-label>
+      <ion-toggle checked="true" slot="end" color="success"> </ion-toggle>
+    </ion-item>
+    <ion-item>
+      <ion-label>Orange</ion-label>
+      <ion-toggle checked="true" slot="end" color="warning"> </ion-toggle>
+    </ion-item>
+    <ion-item>
+      <ion-label>Cherry</ion-label>
+      <ion-toggle checked="true" slot="end" color="danger"> </ion-toggle>
+    </ion-item>
+    <ion-item>
+      <ion-label>Banana</ion-label>
+      <ion-toggle checked="true" slot="end" color="light"> </ion-toggle>
+    </ion-item>
+    <ion-item>
+      <ion-label>Cantaloupe</ion-label>
+      <ion-toggle checked="true" slot="end" color="medium"> </ion-toggle>
+    </ion-item>
+    <ion-item>
+      <ion-label>Blackberry</ion-label>
+      <ion-toggle checked="true" slot="end" color="dark"> </ion-toggle>
+    </ion-item>
+    
+
+    <div style="padding-top:20px; display: flex; align-items: center; justify-content: center; text-align: center;">
+      <p>You can notice that the timer is 10s remaining . <br>
+        Once timer reachs to 0, the app will be locked up!
+      </p>
+    </div>
+
+
+  </ion-list>
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar color='secondary'>
+    <ion-row>
+      <ion-col size='12' class="ion-text-center">
+        Automatic logout in: {{ (logoutTimer | async)*1000 | date:'mm:ss'}}
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>

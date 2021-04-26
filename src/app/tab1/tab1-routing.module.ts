@@ -6,7 +6,11 @@ const routes: Routes = [
   {
     path: '',
     component: Tab1Page,
-  }
+  },
+  {
+    path: 'tabsview',
+    loadChildren: () => import('./components/tabsview/music/music.module').then( m => m.MusicPageModule)
+  },
 ];
 
 @NgModule({

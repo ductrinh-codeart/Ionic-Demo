@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar color="warning">
+    <ion-title>Locked</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="showFallback" class="fallback" data-keyboard="false" data-backdrop="static">
+    <ion-icon name="lock-closed-outline" size="large"></ion-icon>
+    <ion-input [(ngModel)]="password" type= "password" placeholder="Password"></ion-input>
+    <ion-button (click)="unlock()" expand="full">Unlock with code</ion-button>
+    <!-- <ion-button (click)="openBiometricAuth()" expand="full">
+      <ion-icon name="finger-print" slot="icon-only"></ion-icon>
+    </ion-button> -->
+    <p style="margin-top:50px">To continue with the app, password is my B.O.D!</p>
+  </div>
+
+  <div class="logout-button">
+  <ion-button (click)="modalCtrl.dismiss()" routerLink="/tabs/tab3">
+      Logout
+    </ion-button>
+  </div>
+</ion-content>

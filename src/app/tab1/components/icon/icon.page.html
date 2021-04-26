@@ -1,0 +1,65 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title style="text-transform: capitalize;">grid</ion-title>
+  </ion-toolbar>
+  <ion-segment [(ngModel)]="segmentModel"  (ionChange)="segmentChanged($event)">
+    <ion-segment-button value="outline">
+      <ion-label>OUTLINE</ion-label>
+    </ion-segment-button>
+
+    <ion-segment-button value="filled">
+      <ion-label>FILLED</ion-label>
+    </ion-segment-button>
+
+    <ion-segment-button value="sharp">
+      <ion-label>SHARP</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+</ion-header>
+
+
+
+<ion-content>
+
+  <ion-card *ngIf="segmentModel === 'outline'">
+    <ion-card-header>
+      <ion-card-title>Outline Icons</ion-card-title>
+      <ion-icon name="call-outline"></ion-icon>
+    </ion-card-header>
+  
+    <ion-card-content>
+      Since i'm a lazy human, I put some text here instead of inserting bunch of icons, to save time.
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="segmentModel === 'filled'">
+    <ion-card-header>
+      <ion-card-title>Filled Icons</ion-card-title>
+      <ion-icon name="call"></ion-icon>
+    </ion-card-header>
+  
+    <ion-card-content>
+      Since i'm a lazy human, I put some text here instead of inserting bunch of icons, to save time.
+    </ion-card-content>
+  </ion-card>
+
+
+  <ion-card *ngIf="segmentModel === 'sharp'">
+    <ion-card-header>
+      <ion-card-title>Sharp Icons</ion-card-title>
+      <ion-icon name="call-sharp"></ion-icon>
+    </ion-card-header>
+  
+    <ion-card-content>
+      Since i'm a lazy human, I put some text here instead of inserting bunch of icons, to save time.
+    </ion-card-content>
+  </ion-card>
+
+
+
+
+
+</ion-content>
