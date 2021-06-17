@@ -28,7 +28,10 @@ export class ReorderPage implements OnInit {
     this.reorderGroup.disabled = !this.reorderGroup.disabled;
   }
 
-  ngOnInit() {
+  ngOnInit() {}
+
+  public onItemReorder({ detail }) {
+    detail.complete(true);
   }
 
 }
