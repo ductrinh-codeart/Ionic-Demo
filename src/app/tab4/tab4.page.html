@@ -14,12 +14,12 @@
   </ion-header>
 
 
-  <ion-grid>
+  <ion-grid *ngIf="toggleview">
     <ion-row>
       <ion-col size="12" size-md="8" size-lg="6">
-        <ion-card *ngIf="inputform">
+        <ion-card>
           <ion-label>
-            <div class="label"><b>Collect Information Form</b></div>
+            <div class="label"><b>Biểu mẫu lấy dữ liệu</b></div>
           </ion-label>
           <form [formGroup]="registrationForm">
             <ion-item>
@@ -35,7 +35,7 @@
             </ion-item>
 
             <ion-item>
-              <ion-label>
+              <ion-label class="hide-mobile">
                 Giới tính
                 <span *ngFor="let error of errorMessages.sex">
                   <ng-container *ngIf="sex.hasError(error.type) && (sex.dirty || sex.touched)">
@@ -97,7 +97,8 @@
                   </ng-container>
                 </span>
               </ion-label>
-              <ion-input type="text" id="email" placeholder="Ex: duc.trinh@codeart.vn" formControlName="email"></ion-input>
+              <ion-input type="text" id="email" placeholder="Ex: duc.trinh@codeart.vn" formControlName="email">
+              </ion-input>
             </ion-item>
 
             <ion-item>
@@ -113,62 +114,44 @@
             </ion-item>
           </form>
         </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
 
-        <ion-card *ngIf="submitform">
+  <ion-grid *ngIf="!toggleview" style="margin-bottom: 100px;">
+    <ion-row>
+      <ion-col size="12" size-md="6" size-lg="4" size-xl="3" *ngFor="let person of SubmittedArray, let i = index">
+        <ion-card>
           <ion-label>
-            <div class="label"><b>Your Submitted Form Value</b></div>
+            <div class="label"><b>Dữ liệu {{i+1}}</b></div>
           </ion-label>
           <ion-item>
-            <ion-input id="name" type="text" readonly>Họ và Tên: {{form.name}}</ion-input>
+            <ion-input id="name" type="text" readonly>Họ và Tên: {{person.name}}</ion-input>
           </ion-item>
           <ion-item>
-            <ion-input id="sex" type="text" readonly>Giới tính: {{form.sex}}</ion-input>
+            <ion-input id="age" type="text" readonly>Số điện thoại: {{person.phone}}</ion-input>
           </ion-item>
-          <ion-item>
-            <ion-input id="age" type="text" readonly>Tuổi: {{form.age}}</ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-input id="age" type="text" readonly>Số điện thoại: {{form.phone}}</ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-input id="age" type="text" readonly>Email: {{form.email}}</ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-input id="age" type="text" readonly>Địa chỉ: {{form.address}}</ion-input>
-          </ion-item>
-
-          <div>
-            <ion-grid>
-              <ion-row class="center" style="display: block;">
-                <ion-text>
-                  <b>Thông tin đã chính xác, xác nhận gửi?</b>
-                </ion-text>
-              </ion-row>
-              <ion-row class="center">
-                <ion-col>
-                  <ion-button color="danger" (click)="refuse()">
-                    <ion-icon name="close-outline"></ion-icon>
-                  </ion-button>
-                </ion-col>
-                <ion-col>
-                  <ion-button color="success" (click)="accept()">
-                    <ion-icon name="checkmark-outline"></ion-icon>
-                  </ion-button>
-                </ion-col>
-              </ion-row>
-            </ion-grid>
-          </div>
         </ion-card>
       </ion-col>
     </ion-row>
   </ion-grid>
 
 
-
-  <ion-fab vertical="bottom" horizontal="center" slot="fixed" *ngIf="inputform">
-    <ion-fab-button (click)="Submit()">
+  <ion-fab vertical="bottom" horizontal="center" slot="fixed" *ngIf="toggleview">
+    <ion-fab-button color='primary' (click)="Submit()">
       <ion-icon name="clipboard-outline"></ion-icon>
     </ion-fab-button>
+  </ion-fab>
+
+  <ion-fab vertical="top" horizontal="end" edge slot="fixed">
+    <ion-fab-button color='danger' (click)="toggle()">
+      <ion-icon name="bookmarks-outline"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="start">
+      <ion-fab-button color='danger' (click)="delete()">
+        <ion-icon name="trash-outline"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
   </ion-fab>
 </ion-content>
