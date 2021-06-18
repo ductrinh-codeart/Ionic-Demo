@@ -157,6 +157,11 @@ export class Tab4Page {
   
   clearAll(){
     this.SubmittedArray = [];
+    this.ToastInfo = {
+      message: 'Đã xóa toàn bộ dữ liệu!',
+      color: 'success',
+    }
+    this.presentToast();
     this.toggle();
   }
 
@@ -166,7 +171,7 @@ export class Tab4Page {
     }
     else {
       this.ToastInfo = {
-        message: 'Không có dữ liệu nào để xóa!',
+        message: 'Không có dữ liệu nào để xóa',
         color: 'warning',
       }
       this.presentToast();
@@ -177,6 +182,8 @@ export class Tab4Page {
   async presentAlert() {
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
+      mode: 'ios',
+      backdropDismiss: false,
       header: 'Cảnh Báo',
       message: 'Bạn có đồng ý xóa toàn bộ biểu mẫu?',
       buttons: [
@@ -184,7 +191,6 @@ export class Tab4Page {
           text: 'Hủy xóa',
           handler: () => {
             console.log('Hủy xóa');
-            this.toggle();
           }
         }, {
           text: 'Xóa!',
