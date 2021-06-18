@@ -16,10 +16,12 @@
 
   <ion-grid>
     <ion-row>
-      <ion-col size="12">
+      <ion-col size="12" size-md="8" size-lg="6">
         <ion-card *ngIf="inputform">
+          <ion-label>
+            <div class="label"><b>Collect Information Form</b></div>
+          </ion-label>
           <form [formGroup]="registrationForm">
-
             <ion-item>
               <ion-label position="floating">
                 Name
@@ -88,7 +90,7 @@
 
         <ion-card *ngIf="submitform">
           <ion-label>
-            <div class="submitted"><b>Your Submitted Form Value</b></div>
+            <div class="label"><b>Your Submitted Form Value</b></div>
           </ion-label>
           <ion-item>
             <ion-input id="name" type="text" readonly>Name: {{form.name}}</ion-input>
