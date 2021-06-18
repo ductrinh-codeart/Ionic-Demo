@@ -120,9 +120,9 @@
 
 
   <ion-grid *ngIf="listview" style="margin-bottom: 100px;">
-    <ion-row>
+    <ion-row *ngIf="SubmittedArray.length !== 0">
       <ion-col size="12" size-md="6" size-lg="4" size-xl="3" *ngFor="let person of SubmittedArray, let i = index">
-        <ion-card>
+        <ion-card class="list">
           <ion-label>
             <div class="label"><b>Dữ liệu {{i+1}}</b></div>
           </ion-label>
@@ -132,6 +132,17 @@
           <ion-item>
             <ion-input id="age" type="text" readonly>Số điện thoại: {{person.phone}}</ion-input>
           </ion-item>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="SubmittedArray.length == 0">
+      <ion-col size="12" size-md="6" size-lg="4" size-xl="3">
+        <ion-card class="list null">
+          <ion-label>
+            <div class="label"><b>Biểu mẫu dữ liệu</b></div>
+          </ion-label>
+          <ion-text>Không có dữ liệu!</ion-text>
         </ion-card>
       </ion-col>
     </ion-row>
@@ -148,7 +159,8 @@
     <ion-fab-button color='danger' (click)="togglelist()">
       <ion-icon name="bookmarks-outline"></ion-icon>
     </ion-fab-button>
-    <ion-fab-list side="start">
+
+    <ion-fab-list *ngIf="SubmittedArray.length !== 0" side="start">
       <ion-fab-button color='danger' (click)="delete()">
         <ion-icon name="trash-outline"></ion-icon>
       </ion-fab-button>

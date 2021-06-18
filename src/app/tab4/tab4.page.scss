@@ -26,6 +26,15 @@ ion-radio{
     margin: 5px;
 }
 
+.list{
+    min-height: 500px;
+
+    &.null{
+    text-align: center;
+    line-height: 500px;
+    }
+}
+
 
 @media screen and (max-width: 576px) {
     .hide-mobile {
