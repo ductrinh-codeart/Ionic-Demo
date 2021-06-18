@@ -24,39 +24,67 @@
           <form [formGroup]="registrationForm">
             <ion-item>
               <ion-label position="floating">
-                Name
+                Họ và Tên
                 <span *ngFor="let error of errorMessages.name">
                   <ng-container *ngIf="name.hasError(error.type) && (name.dirty || name.touched)">
                     <small class="error-message">{{error.message}}</small>
                   </ng-container>
                 </span>
               </ion-label>
-              <ion-input type="text" id="name" formControlName="name"> </ion-input>
+              <ion-input type="text" id="name" placeholder="Nhập tên tại đây" formControlName="name"> </ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label>
+                Giới tính
+                <span *ngFor="let error of errorMessages.sex">
+                  <ng-container *ngIf="sex.hasError(error.type) && (sex.dirty || sex.touched)">
+                    <small class="error-message">{{error.message}}</small>
+                  </ng-container>
+                </span>
+              </ion-label>
+              <ion-radio-group style="display: flex;" value="Male" id="sex" formControlName="sex">
+                <ion-item lines="none">
+                  <ion-label>Nam</ion-label>
+                  <ion-radio slot="start" value="Male" color='success'></ion-radio>
+                </ion-item>
+
+                <ion-item lines="none">
+                  <ion-label>Nữ</ion-label>
+                  <ion-radio slot="start" value="Female" color='danger'></ion-radio>
+                </ion-item>
+
+                <ion-item lines="none">
+                  <ion-label>Khác</ion-label>
+                  <ion-radio slot="start" value="Other" color='dark'></ion-radio>
+                </ion-item>
+              </ion-radio-group>
             </ion-item>
 
             <ion-item>
               <ion-label position="floating">
-                Age
+                Tuổi
                 <span *ngFor="let error of errorMessages.age">
                   <ng-container *ngIf="age.hasError(error.type) && (age.dirty || age.touched)">
                     <small class="error-message">{{error.message}}</small>
                   </ng-container>
                 </span>
               </ion-label>
-              <ion-input type="number" id="age" formControlName="age" min=0 max=150 mask="separator.2"
-                thousandSeparator=","> </ion-input>
+
+              <ion-range min="0" max="150" pin="true" color="primary" id="age" formControlName="age">
+              </ion-range>
             </ion-item>
 
             <ion-item>
               <ion-label position="floating">
-                Phone
+                Số điện thoại
                 <span *ngFor="let error of errorMessages.phone">
                   <ng-container *ngIf="phone.hasError(error.type) && (phone.dirty || phone.touched)">
                     <small class="error-message">{{error.message}}</small>
                   </ng-container>
                 </span>
               </ion-label>
-              <ion-input type="tel" id="phone" formControlName="phone" mask="separator.2" thousandSeparator=",">
+              <ion-input type="tel" id="phone" placeholder="Start with +84 or 0." formControlName="phone">
               </ion-input>
             </ion-item>
 
@@ -69,12 +97,12 @@
                   </ng-container>
                 </span>
               </ion-label>
-              <ion-input type="text" id="email" formControlName="email"></ion-input>
+              <ion-input type="text" id="email" placeholder="Ex: duc.trinh@codeart.vn" formControlName="email"></ion-input>
             </ion-item>
 
             <ion-item>
               <ion-label position="floating">
-                Address
+                Địa chỉ
                 <span *ngFor="let error of errorMessages.address">
                   <ng-container *ngIf="address.hasError(error.type) && (address.dirty || address.touched)">
                     <small class="error-message">{{error.message}}</small>
@@ -83,7 +111,6 @@
               </ion-label>
               <ion-input type="text" id="address" formControlName="address"></ion-input>
             </ion-item>
-
           </form>
         </ion-card>
 
@@ -94,6 +121,9 @@
           </ion-label>
           <ion-item>
             <ion-input id="name" type="text" readonly>Name: {{form.name}}</ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input id="sex" type="text" readonly>Sex: {{form.sex}}</ion-input>
           </ion-item>
           <ion-item>
             <ion-input id="age" type="text" readonly>Age: {{form.age}}</ion-input>
