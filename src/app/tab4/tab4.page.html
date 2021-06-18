@@ -84,7 +84,7 @@
                   </ng-container>
                 </span>
               </ion-label>
-              <ion-input type="tel" id="phone" placeholder="Start with +84 or 0." formControlName="phone">
+              <ion-input type="text" id="phone" placeholder="Bắt đầu bằng số 0." formControlName="phone">
               </ion-input>
             </ion-item>
 
@@ -119,7 +119,7 @@
   </ion-grid>
 
 
-  <ion-grid *ngIf="!toggleview" style="margin-bottom: 100px;">
+  <ion-grid *ngIf="listview" style="margin-bottom: 100px;">
     <ion-row>
       <ion-col size="12" size-md="6" size-lg="4" size-xl="3" *ngFor="let person of SubmittedArray, let i = index">
         <ion-card>
@@ -145,7 +145,7 @@
   </ion-fab>
 
   <ion-fab vertical="top" horizontal="end" edge slot="fixed">
-    <ion-fab-button color='danger' (click)="toggle()">
+    <ion-fab-button color='danger' (click)="togglelist()">
       <ion-icon name="bookmarks-outline"></ion-icon>
     </ion-fab-button>
     <ion-fab-list side="start">

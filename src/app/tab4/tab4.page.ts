@@ -11,6 +11,7 @@ import { AlertController } from '@ionic/angular';
 })
 export class Tab4Page {
   toggleview = true;
+  listview = false;
   modalValue;
 
   constructor(
@@ -154,6 +155,20 @@ export class Tab4Page {
   toggle(){
     this.toggleview = !this.toggleview;
   }
+
+  togglelist() {
+    this.toggleview = !this.toggleview;
+    this.listview = !this.listview;
+  }
+
+  cancel(){
+    this.ToastInfo = {
+      message: 'Đã hủy xóa',
+      color: 'warning',
+    }
+    this.presentToast();
+    this.togglelist();
+  }
   
   clearAll(){
     this.SubmittedArray = [];
@@ -162,7 +177,7 @@ export class Tab4Page {
       color: 'success',
     }
     this.presentToast();
-    this.toggle();
+    this.togglelist();
   }
 
   delete(){
@@ -191,6 +206,7 @@ export class Tab4Page {
           text: 'Hủy xóa',
           handler: () => {
             console.log('Hủy xóa');
+            this.cancel();
           }
         }, {
           text: 'Xóa!',
@@ -232,30 +248,30 @@ export class Tab4Page {
   public errorMessages = {
     name: [
       { type: 'required', message: '*bắt buộc'},
-      { type: 'maxlength', message: "Không được quá 40 ký tự! "},
-      { type: 'pattern', message: "Tên không được có số hoặc ký tự đặc biệt! "}
+      { type: 'maxlength', message: "*Không được quá 40 ký tự! "},
+      { type: 'pattern', message: "*Tên không được có số hoặc ký tự đặc biệt! "}
     ],
     sex: [
       { type: 'required', message: '*bắt buộc'},
     ],
     age: [
       { type: 'required', message: '*bắt buộc'},
-      { type: 'min', message: "Bạn không đủ tuổi..."},
-      { type: 'max', message: "Bạn già thế à!? "}
+      { type: 'min', message: "*Bạn không đủ tuổi..."},
+      { type: 'max', message: "*Bạn già thế à!? "}
     ],
     phone: [
       { type: 'required', message: '*bắt buộc'},
-      { type: 'maxlength', message: "Số điện thoại không quá 12 số! "},
-      { type: 'pattern', message: 'Nhập thông tin phù hợp! '}
+      { type: 'maxlength', message: "*Số điện thoại không quá 11 số! "},
+      { type: 'pattern', message: '*Nhập thông tin phù hợp! '}
     ],
     email: [
       { type: 'required', message: '*bắt buộc'},
-      { type: 'pattern', message: 'Nhập thông tin phù hợp! '}
+      { type: 'pattern', message: '*Nhập thông tin phù hợp! '}
     ],
     address: [
       { type: 'required', message: '*bắt buộc'},
-      { type: 'maxlength', message: "Không được quá 80 ký tự! "},
-      { type: 'pattern', message: 'Nhập thông tin phù hợp! '}
+      { type: 'maxlength', message: "*Không được quá 80 ký tự! "},
+      { type: 'pattern', message: '*Nhập thông tin phù hợp! '}
     ]
   }
 
@@ -264,8 +280,8 @@ export class Tab4Page {
     name: ['', [Validators.required, Validators.maxLength(40), Validators.pattern("([a-zắằẳẵặăấầẩẫậâáàãảạđếềểễệêéèẻẽẹíìỉĩịốồổỗộôớờởỡợơóòõỏọứừửữựưúùủũụýỳỷỹỵA-ZẮẰẲẴẶĂẤẦẨẪẬÂÁÀÃẢẠĐẾỀỂỄỆÊÉÈẺẼẸÍÌỈĨỊỐỒỔỖỘÔỚỜỞỠỢƠÓÒÕỎỌỨỪỬỮỰƯÚÙỦŨỤÝỲỶỸỴ ]){0,}")]],
     sex: ['', [Validators.required]],
     age: ['', [Validators.required, Validators.min(18), Validators.max(120)]],
-    phone: ['', [Validators.required, Validators.maxLength(12), Validators.pattern("^((\\+84?)|0)?[0-9]{10,}")]],
-    email: ['', [Validators.required, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$')]],
+    phone: ['', [Validators.required, Validators.maxLength(11), Validators.pattern("^(0)[0-9]{9,}$")]],
+    email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$')]],
     address: ['', [Validators.required, Validators.maxLength(80), Validators.pattern("([0-9a-zắằẳẵặăấầẩẫậâáàãảạđếềểễệêéèẻẽẹíìỉĩịốồổỗộôớờởỡợơóòõỏọứừửữựưúùủũụýỳỷỹỵA-ZẮẰẲẴẶĂẤẦẨẪẬÂÁÀÃẢẠĐẾỀỂỄỆÊÉÈẺẼẸÍÌỈĨỊỐỒỔỖỘÔỚỜỞỠỢƠÓÒÕỎỌỨỪỬỮỰƯÚÙỦŨỤÝỲỶỸỴ/,. ]){0,}")]],
   })
   
