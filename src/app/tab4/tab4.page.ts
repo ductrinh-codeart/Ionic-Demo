@@ -58,31 +58,31 @@ export class Tab4Page {
 
   public errorMessages = {
     name: [
-      { type: 'required', message: '*required '},
-      { type: 'maxlength', message: "Name can't be more than 40 characters! "},
-      { type: 'pattern', message: "Name can't have other characters or numbers! "}
+      { type: 'required', message: '*bắt buộc'},
+      { type: 'maxlength', message: "Không được quá 40 ký tự! "},
+      { type: 'pattern', message: "Tên không được có số hoặc ký tự đặc biệt! "}
     ],
     sex: [
-      { type: 'required', message: '*required '},
+      { type: 'required', message: '*bắt buộc'},
     ],
     age: [
-      { type: 'required', message: '*required '},
-      { type: 'min', message: "You aren't old enough.. "},
-      { type: 'max', message: "You can't be that old!? "}
+      { type: 'required', message: '*bắt buộc'},
+      { type: 'min', message: "Bạn không đủ tuổi..."},
+      { type: 'max', message: "Bạn già thế à!? "}
     ],
     phone: [
-      { type: 'required', message: '*required '},
-      { type: 'maxlength', message: "Phone number can't be longer than 12 characters! "},
-      { type: 'pattern', message: 'Please enter a valid phone number! '}
+      { type: 'required', message: '*bắt buộc'},
+      { type: 'maxlength', message: "Số điện thoại không quá 12 số! "},
+      { type: 'pattern', message: 'Nhập thông tin phù hợp! '}
     ],
     email: [
-      { type: 'required', message: '*required '},
-      { type: 'pattern', message: 'Please enter a valid email address! '}
+      { type: 'required', message: '*bắt buộc'},
+      { type: 'pattern', message: 'Nhập thông tin phù hợp! '}
     ],
     address: [
-      { type: 'required', message: '*required '},
-      { type: 'maxlength', message: "Address can't be longer than 80 characters! "},
-      { type: 'pattern', message: 'Please enter a valid address! '}
+      { type: 'required', message: '*bắt buộc'},
+      { type: 'maxlength', message: "Không được quá 80 ký tự! "},
+      { type: 'pattern', message: 'Nhập thông tin phù hợp! '}
     ]
   }
 //                                    These are allow special characters for name, from lowercase to UPPERCASE, numbers excepted, space allowed, min length = 0;
@@ -127,7 +127,7 @@ export class Tab4Page {
       this.registrationForm.markAllAsTouched();
       
       this.ToastInfo = {
-        message: "There are errors in the form, please check again!",
+        message: "Có lỗi trong biểu mẫu, vui lòng kiểm tra lại!",
         color: 'danger',
       }
 
@@ -142,7 +142,7 @@ export class Tab4Page {
     this.ClearForm();
 
     this.ToastInfo = {
-      message: 'Thanks ' + this.form.name + ', form has been saved!',
+      message: 'Cảm ơn ' + this.form.name + ', biểu mẫu đã được lưu!',
       color: 'success',
     }
 
