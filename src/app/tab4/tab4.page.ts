@@ -62,6 +62,7 @@ export class Tab4Page {
     const modal = await this.modalController.create({
       component: ModalViewPage,
       cssClass: 'modal-class',
+      backdropDismiss: false,
       componentProps: {
         name: this.form.name,
         sex: this.form.sex,
