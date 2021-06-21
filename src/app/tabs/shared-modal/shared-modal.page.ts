@@ -16,6 +16,15 @@ export class SharedModalPage implements OnInit {
   @Input() address: any;
   @Input() code: any;
 
+  modalConfig = null;
+  _modalConfig = {
+    isScanner : false,
+    scannerPageLabel: 'Scanner Demo',
+
+    isFormInput: false,
+    formInputLabel: 'Form Input Demo',
+  }
+
   buttonValue;
 
   constructor(
@@ -24,6 +33,7 @@ export class SharedModalPage implements OnInit {
   }
 
   ngOnInit() {
+    this.modalConfig = Object.assign(this._modalConfig, this.modalConfig);
   }
 
   refuse() {

@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ToastController, ModalController } from '@ionic/angular';
-import { ModalViewPage } from './modal-view/modal-view.page';
 import { AlertController } from '@ionic/angular';
+import { SharedModalPage } from '../tabs/shared-modal/shared-modal.page';
 
 @Component({
   selector: 'app-tab4',
@@ -60,7 +60,7 @@ export class Tab4Page {
 
   async presentModal() {
     const modal = await this.modalController.create({
-      component: ModalViewPage,
+      component: SharedModalPage,
       cssClass: 'modal-class',
       backdropDismiss: false,
       componentProps: {
@@ -70,6 +70,9 @@ export class Tab4Page {
         phone: this.form.phone,
         email: this.form.email,
         address: this.form.address,
+        modalConfig: {
+          isFormInput : true,
+        }
       }
     });
 

@@ -6,9 +6,9 @@
 
 <ion-content>
 
-  <ion-card *ngIf="isTab4">
+  <ion-card *ngIf="modalConfig.isFormInput">
     <ion-label>
-      <div class="label"><b>Demo Form Validators</b></div>
+      <div class="label"><b>{{modalConfig.formInputLabel}}</b></div>
     </ion-label>
     <ion-item>
       <ion-input id="name" type="text" readonly>Họ và Tên: {{name}}</ion-input>
@@ -53,9 +53,9 @@
   </ion-card>
 
 
-  <ion-card>
+  <ion-card *ngIf="modalConfig.isScanner">
     <ion-label>
-      <div class="label"><b>Demo Barcode</b></div>
+      <div class="label"><b>{{modalConfig.scannerPageLabel}}</b></div>
     </ion-label>
     <ion-item>
       <ion-input id="name" type="text" readonly>Họ và Tên: {{name}}</ion-input>

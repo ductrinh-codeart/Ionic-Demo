@@ -114,7 +114,10 @@ export class Tab5Page  {
         name: this.form.name,
         phone: this.form.phone,
         code: this.form.code,
-      }
+        modalConfig: {
+          isScanner : true,
+        }
+      },
     });
 
     modal.onDidDismiss().then((result: any) => {
