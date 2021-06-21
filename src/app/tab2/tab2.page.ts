@@ -13,7 +13,7 @@ export class Tab2Page {
   public base64Image: string;
   public photoAlbum: Array<string> = [];
 
-  note: string = 'To use scanner, run "Ionic cdv run android --livereload" with a connected android device, since it need to be run in cordova environment!';
+  note: string = 'To use camera, run "Ionic cdv run android --livereload" with a connected android device, since it need to be run in cordova environment!';
 
   constructor(
     private camera: Camera,
