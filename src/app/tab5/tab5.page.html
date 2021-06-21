@@ -1,0 +1,191 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Barcode + QR Scanner
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+
+<ion-content [fullscreen]="true" id='QRpage'>
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Barcode + QR Scanner</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+
+  <ion-grid *ngIf="toggleview">
+    <ion-row>
+      <ion-col size="12" size-md="8" size-lg="6">
+        <ion-card>
+          <ion-label>
+            <div class="label"><b>Biểu mẫu lấy dữ liệu</b></div>
+          </ion-label>
+          <form [formGroup]="registrationForm">
+            <ion-item>
+              <ion-label position="floating">
+                Họ và Tên
+                <span *ngFor="let error of errorMessages.name">
+                  <ng-container *ngIf="name.hasError(error.type) && (name.dirty || name.touched)">
+                    <small class="error-message">{{error.message}}</small>
+                  </ng-container>
+                </span>
+              </ion-label>
+              <ion-input type="text" id="name" placeholder="Nhập tên tại đây" formControlName="name"> </ion-input>
+            </ion-item>
+
+            <!-- <ion-item>
+              <ion-label class="hide-mobile">
+                Giới tính
+                <span *ngFor="let error of errorMessages.sex">
+                  <ng-container *ngIf="sex.hasError(error.type) && (sex.dirty || sex.touched)">
+                    <small class="error-message">{{error.message}}</small>
+                  </ng-container>
+                </span>
+              </ion-label>
+              <ion-radio-group style="display: flex;" value="Male" id="sex" formControlName="sex">
+                <ion-item lines="none">
+                  <ion-label>Nam</ion-label>
+                  <ion-radio slot="start" value="Male" color='success'></ion-radio>
+                </ion-item>
+
+                <ion-item lines="none">
+                  <ion-label>Nữ</ion-label>
+                  <ion-radio slot="start" value="Female" color='danger'></ion-radio>
+                </ion-item>
+
+                <ion-item lines="none">
+                  <ion-label>Khác</ion-label>
+                  <ion-radio slot="start" value="Other" color='dark'></ion-radio>
+                </ion-item>
+              </ion-radio-group>
+            </ion-item> -->
+
+            <!-- <ion-item>
+              <ion-label position="floating">
+                Tuổi
+                <span *ngFor="let error of errorMessages.age">
+                  <ng-container *ngIf="age.hasError(error.type) && (age.dirty || age.touched)">
+                    <small class="error-message">{{error.message}}</small>
+                  </ng-container>
+                </span>
+              </ion-label>
+
+              <ion-range min="0" max="150" pin="true" color="primary" id="age" formControlName="age">
+              </ion-range>
+            </ion-item> -->
+
+            <ion-item>
+              <ion-label position="floating">
+                Số điện thoại
+                <span *ngFor="let error of errorMessages.phone">
+                  <ng-container *ngIf="phone.hasError(error.type) && (phone.dirty || phone.touched)">
+                    <small class="error-message">{{error.message}}</small>
+                  </ng-container>
+                </span>
+              </ion-label>
+              <ion-input type="text" id="phone" placeholder="Bắt đầu bằng số 0." formControlName="phone">
+              </ion-input>
+            </ion-item>
+
+            <!-- <ion-item>
+              <ion-label position="floating">
+                Email
+                <span *ngFor="let error of errorMessages.email">
+                  <ng-container *ngIf="email.hasError(error.type) && (email.dirty || phone.email)">
+                    <small class="error-message">{{error.message}}</small>
+                  </ng-container>
+                </span>
+              </ion-label>
+              <ion-input type="text" id="email" placeholder="Ex: duc.trinh@codeart.vn" formControlName="email">
+              </ion-input>
+            </ion-item> -->
+
+            <!-- <ion-item>
+              <ion-label position="floating">
+                Địa chỉ
+                <span *ngFor="let error of errorMessages.address">
+                  <ng-container *ngIf="address.hasError(error.type) && (address.dirty || address.touched)">
+                    <small class="error-message">{{error.message}}</small>
+                  </ng-container>
+                </span>
+              </ion-label>
+              <ion-input type="text" id="address" formControlName="address"></ion-input>
+            </ion-item> -->
+          
+          <div>
+            <ion-item>
+              <ion-label position="floating">
+                Mã BHYT
+                <span *ngFor="let error of errorMessages.code">
+                  <ng-container *ngIf="code.hasError(error.type) && (code.dirty || code.touched)">
+                    <small class="error-message">{{error.message}}</small>
+                  </ng-container>
+                </span>
+              </ion-label>
+              <ion-input type="text" id="code" placeholder="Nhập mã BHYT tại đây!" value={{scannedData}} formControlName="code">
+              </ion-input>
+              <ion-button slot="end" (click)="scanBarcode()">
+                <ion-icon slot="icon-only" name="qr-code-outline"></ion-icon>
+              </ion-button>
+            </ion-item>
+            </div>
+          </form>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+  <ion-grid *ngIf="listview" style="margin-bottom: 100px;">
+    <ion-row *ngIf="SubmittedArray.length !== 0">
+      <ion-col size="12" size-md="6" size-lg="4" size-xl="3" *ngFor="let person of SubmittedArray, let i = index">
+        <ion-card class="list">
+          <ion-label>
+            <div class="label"><b>Dữ liệu {{i+1}}</b></div>
+          </ion-label>
+          <ion-item>
+            <ion-input id="name" type="text" readonly>Họ và Tên: {{person.name}}</ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input id="age" type="text" readonly>Số điện thoại: {{person.phone}}</ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input id="code" type="text" readonly>Mã BHYT: {{person.code}}</ion-input>
+          </ion-item>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf="SubmittedArray.length == 0">
+      <ion-col size="12" size-md="6" size-lg="4" size-xl="3">
+        <ion-card class="list null">
+          <ion-label>
+            <div class="label"><b>Biểu mẫu dữ liệu</b></div>
+          </ion-label>
+          <ion-text>Không có dữ liệu!</ion-text>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+    <ion-fab vertical="bottom" horizontal="center" slot="fixed" *ngIf="toggleview">
+      <ion-fab-button color='primary' (click)="Submit()">
+        <ion-icon name="clipboard-outline"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+  
+    <ion-fab vertical="top" horizontal="end" edge slot="fixed">
+      <ion-fab-button color='danger' (click)="togglelist()">
+        <ion-icon name="bookmarks-outline"></ion-icon>
+      </ion-fab-button>
+  
+      <ion-fab-list *ngIf="SubmittedArray.length !== 0" side="start">
+        <ion-fab-button color='danger' (click)="delete()">
+          <ion-icon name="trash-outline"></ion-icon>
+        </ion-fab-button>
+      </ion-fab-list>
+    </ion-fab>
+</ion-content>
