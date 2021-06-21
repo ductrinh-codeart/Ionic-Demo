@@ -26,6 +26,7 @@ export class Tab2Page {
   public async showActionSheet(i) {
     const actionSheet = await this.actionSheetController.create({
       header: 'Photos',
+      backdropDismiss: false,
       buttons: [{
         text: 'Delete',
         role: 'destructive',
