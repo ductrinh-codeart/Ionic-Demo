@@ -35,13 +35,14 @@ export class Tab5Page  {
   }
 
   scannedData: any;
+  scannedFormat: any;
   encodedData: '';
   encodeData: any;
   inputData: any;
 
   SubmittedArray: Array<object> = []
 
-
+  note: string = 'To use scanner, run "Ionic cdv run android --livereload" with a connected android device, since it need to be run in cordova environment!';
   
   scanBarcode() {
     const options: BarcodeScannerOptions = {
@@ -57,12 +58,12 @@ export class Tab5Page  {
 
     this.barcodeScanner.scan(options).then(barcodeData => {
 
-      // alert(JSON.stringify(barcodeData.text));
+      // alert(JSON.stringify(barcodeData));
 
       this.scannedData = barcodeData.text.slice(0, 15);
-
+      this.scannedFormat = barcodeData.format;
        this.ToastInfo = {
-        message: 'Dữ liệu tìm thấy: ' + this.scannedData,
+        message: 'Dữ liệu tìm thấy: ' + this.scannedData + ' | ' + this.scannedFormat,
         color: 'success',
       }
       this.presentToast();

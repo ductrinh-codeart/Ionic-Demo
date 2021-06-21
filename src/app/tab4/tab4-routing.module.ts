@@ -7,10 +7,6 @@ const routes: Routes = [
     path: '',
     component: Tab4Page
   },
-  {
-    path: 'modal-view',
-    loadChildren: () => import('./modal-view/modal-view.module').then( m => m.ModalViewPageModule)
-  }
 ];
 
 @NgModule({
