@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { ToastController, ModalController } from '@ionic/angular';
+import { ModalController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
 import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-scanner/ngx';
 import { SharedModalPage } from '../tabs/shared-modal/shared-modal.page';
+import { SharedToastService } from '../tabs/shared-toast/shared-toast.service'
 
 @Component({
   selector: 'app-tab5',
@@ -16,7 +17,7 @@ export class Tab5Page  {
   modalValue;
 
   constructor(
-    public toastController: ToastController,
+    public toast: SharedToastService,
     public modalController: ModalController,
     public alertController: AlertController,
     private formBuilder: FormBuilder,
@@ -28,11 +29,6 @@ export class Tab5Page  {
     phone: '',
     code: '',
   };
-
-  ToastInfo = {
-    message: '',
-    color: '',
-  }
 
   scannedData: any;
   scannedFormat: any;
@@ -62,20 +58,22 @@ export class Tab5Page  {
 
       this.scannedData = barcodeData.text.slice(0, 15);
       this.scannedFormat = barcodeData.format;
-       this.ToastInfo = {
+       this.toast.ToastInfo = {
+        header: 'Máy quét:',
         message: 'Dữ liệu tìm thấy: ' + this.scannedData + ' | ' + this.scannedFormat,
         color: 'success',
       }
-      this.presentToast();
+      this.toast.presentToast();
  
     }).catch(err => {
       console.log('Error', err);
 
-      this.ToastInfo = {
+      this.toast.ToastInfo = {
+        header: 'Máy quét:',
         message: 'Không quét được! Lỗi: ' + err,
         color: 'danger',
       }
-      this.presentToast();
+      this.toast.presentToast();
     });
   }
 
@@ -144,12 +142,12 @@ export class Tab5Page  {
       console.log('Refused!');
       this.registrationForm.markAllAsTouched();
       
-      this.ToastInfo = {
+      this.toast.ToastInfo = {
+        header: 'Biểu mẫu:',
         message: "Có lỗi trong biểu mẫu, vui lòng kiểm tra lại!",
         color: 'danger',
       }
-
-      this.presentToast();
+      this.toast.presentToast();
     }
   }
 
@@ -159,12 +157,12 @@ export class Tab5Page  {
     this.SubmittedArray.push(this.registrationForm.value);
     this.ClearForm();
 
-    this.ToastInfo = {
+    this.toast.ToastInfo = {
+      header: 'Biểu mẫu:',
       message: 'Cảm ơn ' + this.form.name + ', biểu mẫu đã được lưu!',
       color: 'success',
     }
-
-    this.presentToast();
+    this.toast.presentToast();
   }
 
   ClearForm() {
@@ -176,27 +174,7 @@ export class Tab5Page  {
     this.toggle();
   }
 
-  async presentToast() {
-    const toast = await this.toastController.create({
-      header: 'Biểu mẫu:',
-      message: this.ToastInfo.message,
-      duration: 5000,
-      position: 'bottom',
-      color: this.ToastInfo.color,
-      buttons: [
-        {
-          text: 'Done',
-          role: 'accept',
-          handler: () => {
-            console.log('Accept clicked');
-          }
-        }
-      ]
-    });
-    await toast.present();
-    const { role } = await toast.onDidDismiss();
-    console.log('onDidDismiss resolved with role', role);
-  }
+
 
   toggle(){
     this.toggleview = !this.toggleview;
@@ -208,21 +186,23 @@ export class Tab5Page  {
   }
 
   cancel(){
-    this.ToastInfo = {
+    this.toast.ToastInfo = {
+      header: 'Biểu mẫu:',
       message: 'Đã hủy xóa',
       color: 'warning',
     }
-    this.presentToast();
+    this.toast.presentToast();
     this.togglelist();
   }
   
   clearAll(){
     this.SubmittedArray = [];
-    this.ToastInfo = {
+    this.toast.ToastInfo = {
+      header: 'Biểu mẫu:',
       message: 'Đã xóa toàn bộ dữ liệu!',
       color: 'success',
     }
-    this.presentToast();
+    this.toast.presentToast();
     this.togglelist();
   }
 
@@ -231,11 +211,12 @@ export class Tab5Page  {
       this.presentAlert();
     }
     else {
-      this.ToastInfo = {
+      this.toast.ToastInfo = {
+        header: 'Biểu mẫu:',
         message: 'Không có dữ liệu nào để xóa',
         color: 'warning',
       }
-      this.presentToast();
+      this.toast.presentToast();
       this.toggle();
     }
   }
