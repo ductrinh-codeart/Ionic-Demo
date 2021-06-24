@@ -16,7 +16,7 @@ export class SharedLoadingService {
     const loading = await this.loadingController.create({
       spinner: 'crescent',
       duration: 2000,
-      message: 'Vui lòng đợi...',
+      message: 'Vui lòng đợi..',
       cssClass: 'custom-class custom-loading',
       backdropDismiss: false,
     });
