@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
+import { SharedLoadingService } from '../tabs/shared-loading/shared-loading.service';
 import { SharedModalPage } from '../tabs/shared-modal/shared-modal.page';
 import { SharedToastService } from '../tabs/shared-toast/shared-toast.service'
 
@@ -17,6 +18,7 @@ export class Tab4Page {
 
   constructor(
     public toast: SharedToastService,
+    public loading: SharedLoadingService,
     public modalController: ModalController,
     public alertController: AlertController,
     private formBuilder: FormBuilder
@@ -152,13 +154,8 @@ export class Tab4Page {
   }
   
   clearAll(){
+    this.loading.presentLoading();
     this.SubmittedArray = [];
-    this.toast.ToastInfo = {
-      header: 'Biểu mẫu:',
-      message: 'Đã xóa toàn bộ dữ liệu!',
-      color: 'success',
-    }
-    this.toast.presentToast();
     this.togglelist();
   }
 

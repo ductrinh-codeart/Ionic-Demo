@@ -184,6 +184,7 @@
     </ion-fab>
   
     <ion-fab vertical="top" horizontal="end" edge slot="fixed">
+      <ion-badge *ngIf="SubmittedArray.length !== 0" color="warning" style="top:-5px; right: 0px; z-index: 3; position: absolute;">{{SubmittedArray.length}}</ion-badge>
       <ion-fab-button color='danger' (click)="togglelist()">
         <ion-icon name="bookmarks-outline"></ion-icon>
       </ion-fab-button>

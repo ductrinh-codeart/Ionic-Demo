@@ -5,6 +5,7 @@ import { AlertController } from '@ionic/angular';
 import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-scanner/ngx';
 import { SharedModalPage } from '../tabs/shared-modal/shared-modal.page';
 import { SharedToastService } from '../tabs/shared-toast/shared-toast.service'
+import { SharedLoadingService } from '../tabs/shared-loading/shared-loading.service';
 
 @Component({
   selector: 'app-tab5',
@@ -18,10 +19,11 @@ export class Tab5Page  {
 
   constructor(
     public toast: SharedToastService,
+    public loading: SharedLoadingService,
     public modalController: ModalController,
     public alertController: AlertController,
     private formBuilder: FormBuilder,
-    private barcodeScanner: BarcodeScanner
+    private barcodeScanner: BarcodeScanner,
   ) { }
 
   form = {
@@ -196,13 +198,8 @@ export class Tab5Page  {
   }
   
   clearAll(){
+    this.loading.presentLoading();
     this.SubmittedArray = [];
-    this.toast.ToastInfo = {
-      header: 'Biểu mẫu:',
-      message: 'Đã xóa toàn bộ dữ liệu!',
-      color: 'success',
-    }
-    this.toast.presentToast();
     this.togglelist();
   }
 
