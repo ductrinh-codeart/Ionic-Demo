@@ -1,0 +1,16 @@
+<ng-container>
+    <form [formGroup]="form">
+  
+      <ng-container *ngFor="let question of questions" class="form-row">
+        <app-question [question]="question" [form]="form"></app-question>
+      </ng-container>
+  
+      <div class="submit-button">
+        <ion-button (click)="onSubmit()" >Save</ion-button>
+      </div>
+    </form>
+</ng-container>
+<!-- 
+<ng-container *ngIf="payLoad" class="form-row">
+    <strong>Saved the following values</strong><br>{{payLoad}}
+</ng-container> -->

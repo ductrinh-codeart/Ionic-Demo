@@ -1,0 +1,79 @@
+<ion-item [formGroup]="form">
+  <ion-label position="floating" [attr.for]="question.key">
+    {{question.label}}
+    <!-- <span class="errorMessage" *ngIf="!isValid"><small> *Bắt buộc </small></span> -->
+
+    <ng-container *ngIf="question.key=='name'">
+    <span *ngFor="let error of errorMessages.name">
+      <ng-container *ngIf="name.hasError(error.type) && (name.dirty || name.touched)">
+        <small class="errorMessage">{{error.message}}</small>
+      </ng-container>
+    </span>
+    </ng-container>
+
+    <ng-container *ngIf="question.key=='age'">
+    <span *ngFor="let error of errorMessages.age">
+      <ng-container *ngIf="age.hasError(error.type) && (age.dirty || age.touched)">
+        <small class="errorMessage">{{error.message}}</small>
+      </ng-container>
+    </span>
+    </ng-container>
+
+    <ng-container *ngIf="question.key=='sex'">
+    <span *ngFor="let error of errorMessages.sex">
+      <ng-container *ngIf="sex.hasError(error.type) && (sex.dirty || sex.touched)">
+        <small class="errorMessage">{{error.message}}</small>
+      </ng-container>
+    </span>
+    </ng-container>
+
+    <ng-container *ngIf="question.key=='phone'">
+    <span *ngFor="let error of errorMessages.phone">
+      <ng-container *ngIf="phone.hasError(error.type) && (phone.dirty || phone.touched)">
+        <small class="errorMessage">{{error.message}}</small>
+      </ng-container>
+    </span>
+    </ng-container>
+
+    <ng-container *ngIf="question.key=='email'">
+    <span *ngFor="let error of errorMessages.email">
+      <ng-container *ngIf="email.hasError(error.type) && (email.dirty || email.touched)">
+        <small class="errorMessage">{{error.message}}</small>
+      </ng-container>
+    </span>
+    </ng-container>
+
+    <ng-container *ngIf="question.key=='section'">
+    <span *ngFor="let error of errorMessages.section">
+      <ng-container *ngIf="section.hasError(error.type) && (section.dirty || section.touched)">
+        <small class="errorMessage">{{error.message}}</small>
+      </ng-container>
+    </span>
+    </ng-container>
+
+    
+  </ion-label>
+
+  <ng-container [ngSwitch]="question.controlType">
+
+    <ion-input *ngSwitchCase="'textbox'" [formControlName]="question.key" [id]="question.key" 
+    [type]="question.type" [required]="question.required" [placeholder]="question.placeholder" [maxlength]="question.maxlength"
+    [pattern]="question.pattern">
+    </ion-input>
+
+    <ion-select *ngSwitchCase="'dropdown'" [id]="question.key" [formControlName]="question.key" [required]="question.required">
+      <ion-select-option *ngFor="let opt of question.options" [value]="opt.key">{{opt.value}}</ion-select-option>
+    </ion-select>
+
+    <ion-range *ngSwitchCase="'range'" [id]="question.key" [formControlName]="question.key" min="0" max="80" pin="true" 
+    [required]="question.required">
+    </ion-range>
+
+    <ion-radio-group *ngSwitchCase="'radio'" [formControlName]="question.key" [id]="question.key" style="display: flex;" [required]="question.required">
+      <ion-item lines="none" *ngFor="let opt of question.options" >
+        <ion-label>{{opt.value}}</ion-label>
+        <ion-radio [value]="opt.key" slot="start"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+  </ng-container>
+</ion-item>

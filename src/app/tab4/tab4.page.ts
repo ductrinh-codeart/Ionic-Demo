@@ -261,7 +261,7 @@ export class Tab4Page {
     sex: ['', [Validators.required]],
     age: ['', [Validators.required, Validators.min(18), Validators.max(120)]],
     phone: ['', [Validators.required, Validators.maxLength(11), Validators.pattern("^(0)[0-9]{9,}$")]],
-    email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$')]],
+    email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@+([a-zA-Z0-9.-])+[.]+[a-zA-Z]{2,4}$')]],
     address: ['', [Validators.required, Validators.maxLength(80), Validators.pattern("([0-9a-zắằẳẵặăấầẩẫậâáàãảạđếềểễệêéèẻẽẹíìỉĩịốồổỗộôớờởỡợơóòõỏọứừửữựưúùủũụýỳỷỹỵA-ZẮẰẲẴẶĂẤẦẨẪẬÂÁÀÃẢẠĐẾỀỂỄỆÊÉÈẺẼẸÍÌỈĨỊỐỒỔỖỘÔỚỜỞỠỢƠÓÒÕỎỌỨỪỬỮỰƯÚÙỦŨỤÝỲỶỸỴ/,. ]){0,}")]],
   })
   

@@ -1,0 +1,43 @@
+.error-message {
+    color: #ff4961;
+}
+
+.label {
+    text-align: center; 
+    line-height: 45px;
+    height: 45px;
+    background-color: #3880ff;
+    color: white;
+}
+
+.center {
+    text-align: center;
+}
+
+ion-grid {
+    margin-top: 50px;
+}
+
+ion-col {
+    margin: auto;
+}
+
+ion-radio{
+    margin: 5px;
+}
+
+.list{
+    min-height: 500px;
+
+    &.null{
+    text-align: center;
+    line-height: 500px;
+    }
+}
+
+
+@media screen and (max-width: 576px) {
+    .hide-mobile {
+        display: none;
+    }
+}
