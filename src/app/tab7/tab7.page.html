@@ -1,0 +1,80 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      NGX Table
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">NGX Table</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="ion-padding">
+
+    <!-- Theme classes dark, material, bootstrap -->
+    <ngx-datatable 
+      class="material"
+      [limit]="5" 
+      [rows]="rows" 
+      [rowHeight]="50" 
+      [columns]="columns"
+      [columnMode]="'force'" 
+      [sortType]="'multi'" 
+      [headerHeight]="50" 
+      [footerHeight]="50">
+
+      <!-- You can use NGX datatable column below to add specific details, templates, classes, bindings -->
+
+      <!-- From here -->
+
+      <ngx-datatable-column name="Name">
+        <ng-template class="row-name" let-column="column" ngx-datatable-header-template> {{ column.name }} </ng-template>
+        <ng-template let-value="value" ngx-datatable-cell-template>
+          <strong>{{ value }}</strong>
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Company">
+        <ng-template class="row-name" let-column="column" ngx-datatable-header-template> {{ column.name }} </ng-template>
+        <ng-template let-value="value" ngx-datatable-cell-template>
+          <strong>{{ value }}</strong>
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Genre">
+        <ng-template class="row-name" let-column="column" ngx-datatable-header-template> {{ column.name }} </ng-template>
+        <ng-template let-value="value" ngx-datatable-cell-template>
+          <strong>{{ value }}</strong>
+        </ng-template>
+      </ngx-datatable-column>
+
+      <ngx-datatable-column name="Group">
+        <ng-template class="row-name" let-column="column" ngx-datatable-header-template> {{ column.name }} </ng-template>
+        <ng-template let-value="value" ngx-datatable-cell-template>
+          <strong>{{ value }}</strong>
+        </ng-template>
+      </ngx-datatable-column>
+
+      
+
+      <!-- The column below will create new column named Detail 
+        even if there is no "detail" data for the movie. -->
+
+      <ngx-datatable-column name="Detail">
+        <ng-template let-column="column" ngx-datatable-header-template> {{ column.name }} </ng-template>
+        <ng-template let-value="value" ngx-datatable-cell-template>
+          <strong>{{ value }}</strong>
+        </ng-template>
+      </ngx-datatable-column>
+
+      <!-- To here -->
+
+    </ngx-datatable>
+
+  </div>
+
+</ion-content>

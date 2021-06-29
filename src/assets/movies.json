@@ -1,0 +1,76 @@
+{
+    "movies": [
+        {
+            "name": "Escape Room",
+            "company": "Columbia Pictures",
+            "genre": "Horror",
+            "group": "A"
+        },
+        {
+            "name": "Rust Creek",
+            "company": "IFC Films",
+            "genre": "Drama",
+            "group": "B"
+        },
+        {
+            "name": "American Hangman",
+            "company": "Hangman Productions",
+            "genre": "Thriller",
+            "group": "C"
+        },
+        {
+            "name": "The Upside",
+            "company": "STX Entertainment",
+            "genre": "Comedy",
+            "group": "A"
+        },
+        {
+            "name": "Replicas",
+            "company": "Entertainment Studios",
+            "genre": "Sci-Fi",
+            "group": "B"
+        },
+        {
+            "name": "After Darkness",
+            "company": "Grindstone Group",
+            "genre": "Drama",
+            "group": "C"
+        },
+        {
+            "name": "Glass",
+            "company": "Universal Pictures",
+            "genre": "Superhero",
+            "group": "A"
+        },
+        {
+            "name": "Close",
+            "company": "Netflix",
+            "genre": "Action",
+            "group": "B"
+        },
+        {
+            "name": "The Final Wish",
+            "company": "BondIt Capital",
+            "genre": "Horror",
+            "group": "C"
+        },
+        {
+            "name": "Serenity",
+            "company": "Aviron Pictures",
+            "genre": "Drama",
+            "group": "A"
+        },
+        {
+            "name": "Miss Bala",
+            "company": "Columbia Pictures",
+            "genre": "Thriller",
+            "group": "B"
+        },
+        {
+            "name": "Velvet Buzzsaw",
+            "company": "Netflix",
+            "genre": "Comedy",
+            "group": "C"
+        }
+    ]
+}
