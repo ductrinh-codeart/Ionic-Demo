@@ -13,68 +13,95 @@
     </ion-toolbar>
   </ion-header>
 
-  <div class="ion-padding">
+  <ion-grid>
+    <ion-row>
 
-    <!-- Theme classes dark, material, bootstrap -->
-    <ngx-datatable 
-      class="material"
-      [limit]="5" 
-      [rows]="rows" 
-      [rowHeight]="50" 
-      [columns]="columns"
-      [columnMode]="'force'" 
-      [sortType]="'multi'" 
-      [headerHeight]="50" 
-      [footerHeight]="50">
+      <ion-col size="12" size-md="7" size-lg="8">
+        <div class="ion-padding">
 
-      <!-- You can use NGX datatable column below to add specific details, templates, classes, bindings -->
+          <!-- Theme classes dark, material, bootstrap -->
+          <ngx-datatable class="material" [limit]="10" [rows]="rows" [rowHeight]="50" [columns]="columns"
+            [columnMode]="ColumnMode.force" [sortType]="'multi'" [headerHeight]="50" [footerHeight]="50"
+            [scrollbarH]="true" [selected]="selected" [selectionType]="SelectionType.checkbox"
+            [selectAllRowsOnPage]="false" [displayCheck]="displayCheck" (select)="onSelect($event)">
 
-      <!-- From here -->
+            <!-- You can use NGX datatable column below to add specific details, templates, classes, bindings -->
 
-      <ngx-datatable-column name="Name">
-        <ng-template class="row-name" let-column="column" ngx-datatable-header-template> {{ column.name }} </ng-template>
-        <ng-template let-value="value" ngx-datatable-cell-template>
-          <strong>{{ value }}</strong>
-        </ng-template>
-      </ngx-datatable-column>
+            <!-- From here -->
 
-      <ngx-datatable-column name="Company">
-        <ng-template class="row-name" let-column="column" ngx-datatable-header-template> {{ column.name }} </ng-template>
-        <ng-template let-value="value" ngx-datatable-cell-template>
-          <strong>{{ value }}</strong>
-        </ng-template>
-      </ngx-datatable-column>
+            <ngx-datatable-column [width]="30" [sortable]="false" [canAutoResize]="false" [draggable]="false"
+              [resizeable]="false" [headerCheckboxable]="true" [checkboxable]="true">
+            </ngx-datatable-column>
 
-      <ngx-datatable-column name="Genre">
-        <ng-template class="row-name" let-column="column" ngx-datatable-header-template> {{ column.name }} </ng-template>
-        <ng-template let-value="value" ngx-datatable-cell-template>
-          <strong>{{ value }}</strong>
-        </ng-template>
-      </ngx-datatable-column>
+            <ngx-datatable-column name="Name">
+              <ng-template class="row-name" let-column="column" ngx-datatable-header-template> {{ column.name }}
+              </ng-template>
+              <ng-template let-value="value" ngx-datatable-cell-template>
+                <strong>{{ value }}</strong>
+              </ng-template>
+            </ngx-datatable-column>
 
-      <ngx-datatable-column name="Group">
-        <ng-template class="row-name" let-column="column" ngx-datatable-header-template> {{ column.name }} </ng-template>
-        <ng-template let-value="value" ngx-datatable-cell-template>
-          <strong>{{ value }}</strong>
-        </ng-template>
-      </ngx-datatable-column>
+            <ngx-datatable-column name="Company">
+              <ng-template class="row-name" let-column="column" ngx-datatable-header-template> {{ column.name }}
+              </ng-template>
+              <ng-template let-value="value" ngx-datatable-cell-template>
+                <strong>{{ value }}</strong>
+              </ng-template>
+            </ngx-datatable-column>
 
-      
+            <ngx-datatable-column name="Genre">
+              <ng-template class="row-name" let-column="column" ngx-datatable-header-template> {{ column.name }}
+              </ng-template>
+              <ng-template let-value="value" ngx-datatable-cell-template>
+                <strong>{{ value }}</strong>
+              </ng-template>
+            </ngx-datatable-column>
 
-      <!-- The column below will create new column named Detail 
+            <ngx-datatable-column name="Group">
+              <ng-template class="row-name" let-column="column" ngx-datatable-header-template> {{ column.name }}
+              </ng-template>
+              <ng-template let-value="value" ngx-datatable-cell-template>
+                <strong>{{ value }}</strong>
+              </ng-template>
+            </ngx-datatable-column>
+
+
+
+            <!-- The column below will create new column named Detail 
         even if there is no "detail" data for the movie. -->
 
-      <ngx-datatable-column name="Detail">
+            <!-- <ngx-datatable-column name="Detail">
         <ng-template let-column="column" ngx-datatable-header-template> {{ column.name }} </ng-template>
         <ng-template let-value="value" ngx-datatable-cell-template>
           <strong>{{ value }}</strong>
         </ng-template>
-      </ngx-datatable-column>
+      </ngx-datatable-column> -->
 
-      <!-- To here -->
+            <!-- To here -->
 
-    </ngx-datatable>
+          </ngx-datatable>
 
-  </div>
+        </div>
+      </ion-col>
+
+      <ion-col size="12" size-md="5" size-lg="4">
+        <div class="selected-column ion-padding">
+          <h4>
+            Selections <small>({{ selected?.length }})</small>
+          </h4>
+          <ul>
+            <li *ngFor="let sel of selected">
+              {{ sel.name }}
+            </li>
+            <li *ngIf="!selected?.length">No Selections</li>
+          </ul>
+
+          <ion-button *ngIf="!selected.length == 0" (click)="submitArray()">
+            Submit
+          </ion-button>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
 </ion-content>

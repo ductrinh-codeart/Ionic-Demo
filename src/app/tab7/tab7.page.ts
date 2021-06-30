@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ViewEncapsulation } from '@angular/core';
+import { ColumnMode, SelectionType } from '@swimlane/ngx-datatable'
+import { SharedToastService } from '../tabs/shared-toast/shared-toast.service';
 
 export interface Data {
   movies: string;
@@ -18,9 +20,15 @@ export class Tab7Page implements OnInit {
   public columns: any;
   public rows: any;
 
+  selected = [];
+
+  ColumnMode = ColumnMode;
+  SelectionType = SelectionType;
+
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    public toast: SharedToastService,
   ) {
     this.columns = [
       { name: 'Name' },
@@ -37,6 +45,33 @@ export class Tab7Page implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  onSelect({ selected }) {
+    // console.log('Select Event', selected, this.selected);
+
+    this.selected.splice(0, this.selected.length);
+    this.selected.push(...selected);
+  }
+
+  // onActivate(event) {
+  //   console.log('Activate Event', event);
+  // }
+
+  submitArray() {
+    console.log(this.selected);
+    this.toast.ToastInfo = {
+      header: 'NGX Table',
+      message: 'Đã lưu ' + this.selected.length + ' dữ liệu vào console!',
+      color: 'success',
+    }
+    this.toast.presentToast();
+
+    this.clearArray();
+  }
+
+  clearArray() {
+    this.selected = [];
   }
 
 }
