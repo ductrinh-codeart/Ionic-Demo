@@ -20,14 +20,16 @@
       <ion-input id="age" type="text" readonly>Tuổi: {{age}}</ion-input>
     </ion-item>
     <ion-item>
-      <ion-input id="age" type="text" readonly>Số điện thoại: {{phone}}</ion-input>
+      <ion-input id="phone" type="text" readonly>Số điện thoại: {{phone}}</ion-input>
     </ion-item>
     <ion-item>
-      <ion-input id="age" type="text" readonly>Email: {{email}}</ion-input>
+      <ion-input id="email" type="text" readonly>Email: {{email}}</ion-input>
     </ion-item>
+    <ng-container *ngFor="let t of addresses, let i = index">
     <ion-item>
-      <ion-input id="age" type="text" readonly>Địa chỉ: {{address}}</ion-input>
+      <ion-input id="address" type="text" readonly>Địa chỉ {{i+1}}: {{t.address}}</ion-input>
     </ion-item>
+    </ng-container>
 
     <div>
       <ion-grid>
@@ -67,13 +69,13 @@
       <ion-input id="age" type="text" readonly>Tuổi: {{age}}</ion-input>
     </ion-item> -->
     <ion-item>
-      <ion-input id="age" type="text" readonly>Số điện thoại: {{phone}}</ion-input>
+      <ion-input id="phone" type="text" readonly>Số điện thoại: {{phone}}</ion-input>
     </ion-item>
     <!-- <ion-item>
-      <ion-input id="age" type="text" readonly>Email: {{email}}</ion-input>
+      <ion-input id="email" type="text" readonly>Email: {{email}}</ion-input>
     </ion-item> -->
     <ion-item>
-      <ion-input id="age" type="text" readonly>Mã BHYT: {{code}}</ion-input>
+      <ion-input id="code" type="text" readonly>Mã BHYT: {{code}}</ion-input>
     </ion-item>
 
     <div>

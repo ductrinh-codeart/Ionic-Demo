@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
 import { SharedLoadingService } from '../tabs/shared-loading/shared-loading.service';
@@ -30,7 +30,7 @@ export class Tab4Page {
     age: '',
     phone: '',
     email: '',
-    address: '',
+    addresses: {},
   };
 
   SubmittedArray: Array<object> = []
@@ -51,7 +51,7 @@ export class Tab4Page {
     this.form.age = this.registrationForm.controls.age.value;
     this.form.phone = this.registrationForm.controls.phone.value;
     this.form.email = this.registrationForm.controls.email.value;
-    this.form.address = this.registrationForm.controls.address.value;
+    this.form.addresses = this.registrationForm.controls.addresses.value;
     this.presentModal();
   }
 
@@ -67,7 +67,7 @@ export class Tab4Page {
         age: this.form.age,
         phone: this.form.phone,
         email: this.form.email,
-        address: this.form.address,
+        addresses: this.form.addresses,
         modalConfig: {
           isFormInput : true,
         }
@@ -129,7 +129,7 @@ export class Tab4Page {
       'age': '',
       'phone': '',
       'email': '',
-      'address': '',
+      'addresses': {},
     });
     this.toggle();
   }
@@ -201,6 +201,18 @@ export class Tab4Page {
     await alert.present();
   }
 
+  addAddress() {
+    const newAddress = this.formBuilder.group({
+      address: ['', [Validators.required, Validators.maxLength(80), Validators.pattern("([0-9a-zắằẳẵặăấầẩẫậâáàãảạđếềểễệêéèẻẽẹíìỉĩịốồổỗộôớờởỡợơóòõỏọứừửữựưúùủũụýỳỷỹỵA-ZẮẰẲẴẶĂẤẦẨẪẬÂÁÀÃẢẠĐẾỀỂỄỆÊÉÈẺẼẸÍÌỈĨỊỐỒỔỖỘÔỚỜỞỠỢƠÓÒÕỎỌỨỪỬỮỰƯÚÙỦŨỤÝỲỶỸỴ/,. ]){0,}")]]
+    });
+  
+    this.addresses.push(newAddress);
+  }
+
+  deleteAddress(addressIndex: number) {
+    this.addresses.removeAt(addressIndex);
+  }
+
   get name() {
     return this.registrationForm.get('name');
   }
@@ -221,8 +233,8 @@ export class Tab4Page {
     return this.registrationForm.get('email');
   }
 
-  get address() {
-    return this.registrationForm.get('address');
+  get addresses() {
+    return this.registrationForm.controls['addresses'] as FormArray;
   }
 
   public errorMessages = {
@@ -248,7 +260,7 @@ export class Tab4Page {
       { type: 'required', message: '*bắt buộc'},
       { type: 'pattern', message: '*Nhập thông tin phù hợp! '}
     ],
-    address: [
+    addresses: [
       { type: 'required', message: '*bắt buộc'},
       { type: 'maxlength', message: "*Không được quá 80 ký tự! "},
       { type: 'pattern', message: '*Nhập thông tin phù hợp! '}
@@ -262,7 +274,7 @@ export class Tab4Page {
     age: ['', [Validators.required, Validators.min(18), Validators.max(120)]],
     phone: ['', [Validators.required, Validators.maxLength(11), Validators.pattern("^(0)[0-9]{9,}$")]],
     email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@+([a-zA-Z0-9.-])+[.]+[a-zA-Z]{2,4}$')]],
-    address: ['', [Validators.required, Validators.maxLength(80), Validators.pattern("([0-9a-zắằẳẵặăấầẩẫậâáàãảạđếềểễệêéèẻẽẹíìỉĩịốồổỗộôớờởỡợơóòõỏọứừửữựưúùủũụýỳỷỹỵA-ZẮẰẲẴẶĂẤẦẨẪẬÂÁÀÃẢẠĐẾỀỂỄỆÊÉÈẺẼẸÍÌỈĨỊỐỒỔỖỘÔỚỜỞỠỢƠÓÒÕỎỌỨỪỬỮỰƯÚÙỦŨỤÝỲỶỸỴ/,. ]){0,}")]],
+    addresses: this.formBuilder.array([]),
   })
   
 // Peter98's note:

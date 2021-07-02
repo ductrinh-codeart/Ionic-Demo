@@ -13,7 +13,7 @@ export class SharedModalPage implements OnInit {
   @Input() age: number;
   @Input() phone: any;
   @Input() email: any;
-  @Input() address: any;
+  @Input() addresses: any;
   @Input() code: any;
 
   modalConfig = null;

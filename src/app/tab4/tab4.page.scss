@@ -35,6 +35,14 @@ ion-radio{
     }
 }
 
+.addressInput{
+    display: flex;
+    width: -webkit-fill-available;
+}
+
+.addButton{
+    margin: 20px 0 0;
+}
 
 @media screen and (max-width: 576px) {
     .hide-mobile {

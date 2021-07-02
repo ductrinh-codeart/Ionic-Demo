@@ -102,7 +102,7 @@
             </ion-item>
 
             <ion-item>
-              <ion-label position="floating">
+              <ion-label position="floating" (click)="addAddress()">
                 Địa chỉ
                 <span *ngFor="let error of errorMessages.address">
                   <ng-container *ngIf="address.hasError(error.type) && (address.dirty || address.touched)">
@@ -110,7 +110,24 @@
                   </ng-container>
                 </span>
               </ion-label>
-              <ion-input type="text" id="address" formControlName="address"></ion-input>
+
+              <ng-container formArrayName="addresses">
+                <ng-container *ngFor="let newAddress of addresses.controls; let i = index">
+                  <div class="addressInput" [formGroup]="newAddress">
+                    <ion-input type="text" id="address" formControlName="address" placeholder="Nhập địa chỉ {{i+1}}"></ion-input>
+                    <ion-button (click)="deleteAddress(i)">
+                      <ion-icon name="close-outline">Remove</ion-icon>
+                    </ion-button>
+                  </div>
+                </ng-container>
+              </ng-container>
+
+              <div class="addButton">
+                <ion-button (click)="addAddress()">
+                  <ion-icon name="add-outline">Add</ion-icon>
+                </ion-button>
+              </div>
+
             </ion-item>
           </form>
         </ion-card>
@@ -141,9 +158,11 @@
           <ion-item>
             <ion-input id="email" type="text" readonly>Email: {{person.email}}</ion-input>
           </ion-item>
-          <ion-item>
-            <ion-input id="address" type="text" readonly>Địa chỉ: {{person.address}}</ion-input>
-          </ion-item>
+          <ng-container *ngFor="let t of person.addresses, let i = index">
+            <ion-item>
+              <ion-input id="address" type="text" readonly>Địa chỉ {{i+1}}: {{t.address}}</ion-input>
+            </ion-item>
+          </ng-container>
         </ion-card>
       </ion-col>
     </ion-row>
@@ -168,7 +187,8 @@
   </ion-fab>
 
   <ion-fab vertical="top" horizontal="end" edge slot="fixed">
-    <ion-badge *ngIf="SubmittedArray.length !== 0" color="warning" style="top:-5px; right: 0px; z-index: 3; position: absolute;">{{SubmittedArray.length}}</ion-badge>
+    <ion-badge *ngIf="SubmittedArray.length !== 0" color="warning"
+      style="top:-5px; right: 0px; z-index: 3; position: absolute;">{{SubmittedArray.length}}</ion-badge>
     <ion-fab-button color='danger' (click)="togglelist()">
       <ion-icon name="bookmarks-outline"></ion-icon>
     </ion-fab-button>
