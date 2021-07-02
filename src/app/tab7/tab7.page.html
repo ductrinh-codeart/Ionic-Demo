@@ -20,49 +20,107 @@
         <div class="ion-padding">
 
           <!-- Theme classes dark, material, bootstrap -->
-          <ngx-datatable class="material" [limit]="10" [rows]="rows" [rowHeight]="50" [columns]="columns"
-            [columnMode]="ColumnMode.force" [sortType]="'multi'" [headerHeight]="50" [footerHeight]="50"
-            [scrollbarH]="true" [selected]="selected" [selectionType]="SelectionType.checkbox"
-            [selectAllRowsOnPage]="false" [displayCheck]="displayCheck" (select)="onSelect($event)">
+          <ngx-datatable 
+          class="material" 
+          [limit]="10" 
+          [rows]="rows" 
+          [rowHeight]="50" 
+          [columns]="columns"
+          [columnMode]="ColumnMode.force" 
+          [sortType]="'multi'" 
+          [headerHeight]="50" 
+          [footerHeight]="50"
+          [scrollbarH]="true" 
+          [selected]="selected" 
+          [selectionType]="SelectionType.checkbox"
+          [selectAllRowsOnPage]="false" 
+          [displayCheck]="displayCheck" 
+          (select)="onSelect($event)"
+          >
 
             <!-- You can use NGX datatable column below to add specific details, templates, classes, bindings -->
 
             <!-- From here -->
 
-            <ngx-datatable-column [width]="30" [sortable]="false" [canAutoResize]="false" [draggable]="false"
-              [resizeable]="false" [headerCheckboxable]="true" [checkboxable]="true">
+            <ngx-datatable-column 
+            [width]="30" 
+            [sortable]="false" 
+            [canAutoResize]="false" 
+            [draggable]="false"
+            [resizeable]="false" 
+            [headerCheckboxable]="true" 
+            [checkboxable]="true">
             </ngx-datatable-column>
 
             <ngx-datatable-column name="Name">
               <ng-template class="row-name" let-column="column" ngx-datatable-header-template> {{ column.name }}
               </ng-template>
-              <ng-template let-value="value" ngx-datatable-cell-template>
-                <strong>{{ value }}</strong>
+
+              <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+                <span title="Double click to edit" (dblclick)="editing[rowIndex + '-name'] = true"
+                  *ngIf="!editing[rowIndex + '-name']">
+                  <strong>{{ value }}</strong>
+                </span>
+                <input autofocus 
+                (blur)="updateValue($event, 'name', rowIndex)" 
+                *ngIf="editing[rowIndex + '-name']" 
+                type="text"
+                [value]="value" />
               </ng-template>
-            </ngx-datatable-column>
+              </ngx-datatable-column>
 
             <ngx-datatable-column name="Company">
               <ng-template class="row-name" let-column="column" ngx-datatable-header-template> {{ column.name }}
               </ng-template>
-              <ng-template let-value="value" ngx-datatable-cell-template>
+
+              <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+                <span title="Double click to edit" (dblclick)="editing[rowIndex + '-company'] = true"
+                *ngIf="!editing[rowIndex + '-company']">
                 <strong>{{ value }}</strong>
+              </span>
+              <input autofocus 
+              (blur)="updateValue($event, 'company', rowIndex)" 
+              *ngIf="editing[rowIndex + '-company']" 
+              type="text"
+              [value]="value" />
               </ng-template>
+
             </ngx-datatable-column>
 
             <ngx-datatable-column name="Genre">
               <ng-template class="row-name" let-column="column" ngx-datatable-header-template> {{ column.name }}
               </ng-template>
-              <ng-template let-value="value" ngx-datatable-cell-template>
+
+              <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+                <span title="Double click to edit" (dblclick)="editing[rowIndex + '-genre'] = true"
+                *ngIf="!editing[rowIndex + '-genre']">
                 <strong>{{ value }}</strong>
+              </span>
+              <input autofocus 
+              (blur)="updateValue($event, 'genre', rowIndex)" 
+              *ngIf="editing[rowIndex + '-genre']" 
+              type="text"
+              [value]="value" />
               </ng-template>
+
             </ngx-datatable-column>
 
             <ngx-datatable-column name="Group">
               <ng-template class="row-name" let-column="column" ngx-datatable-header-template> {{ column.name }}
               </ng-template>
-              <ng-template let-value="value" ngx-datatable-cell-template>
+
+              <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+                <span title="Double click to edit" (dblclick)="editing[rowIndex + '-group'] = true"
+                *ngIf="!editing[rowIndex + '-group']">
                 <strong>{{ value }}</strong>
+              </span>
+              <input autofocus 
+              (blur)="updateValue($event, 'group', rowIndex)" 
+              *ngIf="editing[rowIndex + '-group']" 
+              type="text"
+              [value]="value" />
               </ng-template>
+
             </ngx-datatable-column>
 
 
