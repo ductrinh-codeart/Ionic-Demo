@@ -72,5 +72,43 @@
             "genre": "Comedy",
             "group": "C"
         }
+    ],
+
+    "music": [
+        {
+            "Name": "Name 1",
+            "Artist": "Artist 1",
+            "Genre": "Genre 1"
+        },
+        {
+            "Name": "Name 2",
+            "Artist": "Artist 2",
+            "Genre": "Genre 2"
+        },
+        {
+            "Name": "Name 3",
+            "Artist": "Artist 3",
+            "Genre": "Genre 3"
+        },
+        {
+            "Name": "Name 4",
+            "Artist": "Artist 4",
+            "Genre": "Genre 4"
+        },
+        {
+            "Name": "Name 5",
+            "Artist": "Artist 5",
+            "Genre": "Genre 5"
+        },
+        {
+            "Name": "Name 6",
+            "Artist": "Artist 6",
+            "Genre": "Genre 6"
+        },
+        {
+            "Name": "Name 7",
+            "Artist": "Artist 7",
+            "Genre": "Genre 7"
+        }
     ]
 }
