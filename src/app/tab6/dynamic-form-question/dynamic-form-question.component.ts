@@ -11,8 +11,8 @@ import { QuestionBase } from '../questions-group/question-base';
 export class DynamicFormQuestionComponent {
   @Input() question!: QuestionBase<string>;
   @Input() form!: FormGroup;
-  get isValid() { return this.form.controls[this.question.key].valid; }
 
+  get isValid() { return this.form.controls[this.question.key].valid; }
   get name() { return this.form.get('name'); }
   get age() { return this.form.get('age'); }
   get sex() { return this.form.get('sex'); }

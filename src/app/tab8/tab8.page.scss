@@ -1,0 +1,90 @@
+.error-message {
+    color: #ff4961;
+}
+
+.label {
+    text-align: center; 
+    line-height: 45px;
+    height: 45px;
+    background-color: #3880ff;
+    color: white;
+}
+
+.center {
+    text-align: center;
+}
+
+
+ion-col {
+    margin: auto;
+}
+
+ion-radio{
+    margin: 5px;
+}
+
+.list{
+    min-height: 500px;
+
+    &.null{
+    text-align: center;
+    line-height: 500px;
+    }
+}
+
+.addressInput{
+    display: flex;
+    width: -webkit-fill-available;
+}
+
+.addButton{
+    margin: 20px 0 0;
+}
+
+@media screen and (max-width: 576px) {
+    .hide-mobile {
+        display: none;
+    }
+}
+
+.card-body {
+    height: 50px;
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.list-group{
+    min-height: 50px;
+    
+    .list-group-item{
+        margin: 10px;
+    }
+}
+
+ion-label.card-title{
+    margin: 20px auto 0px;
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+.form-group {
+    display: inline-grid;
+}
+
+.card-footer {
+    display: flex;
+    justify-content: center;
+    background-color: #3880ff;
+
+    button {
+        margin: 5px 20px;
+        height: 30px;
+        border-radius: 5px;
+    }
+}
+
+.Error-msg{
+    color: red;
+}
+
