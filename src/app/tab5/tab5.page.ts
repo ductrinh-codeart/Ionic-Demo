@@ -16,6 +16,15 @@ export class Tab5Page  {
   toggleview = true;
   listview = false;
   modalValue;
+  currentColor;
+  currentbgColor;
+  scannedData: any;
+  scannedFormat: any;
+  encodedData: '';
+  encodeData: any;
+  inputData: any;
+  SubmittedArray: Array<object> = []
+  note: string = 'To use scanner, run "Ionic cdv run android --livereload" with a connected android device, since it need to be run in cordova environment!';
 
   constructor(
     public toast: SharedToastService,
@@ -24,24 +33,19 @@ export class Tab5Page  {
     public alertController: AlertController,
     private formBuilder: FormBuilder,
     private barcodeScanner: BarcodeScanner,
-  ) { }
+  ) {
+    this.currentColor = '#FFFFFF';
+    this.currentbgColor = '#3880ff';
+   }
 
   form = {
     name: '',
     phone: '',
     code: '',
+    color: '',
+    bgcolor: '',
   };
 
-  scannedData: any;
-  scannedFormat: any;
-  encodedData: '';
-  encodeData: any;
-  inputData: any;
-
-  SubmittedArray: Array<object> = []
-
-  note: string = 'To use scanner, run "Ionic cdv run android --livereload" with a connected android device, since it need to be run in cordova environment!';
-  
   scanBarcode() {
     const options: BarcodeScannerOptions = {
       preferFrontCamera: false,
@@ -79,6 +83,14 @@ export class Tab5Page  {
     });
   }
 
+  setColor(ev:any) {
+    this.currentColor = this.registrationForm.controls.color.value;
+  }
+
+  setbgColor(ev:any) {
+    this.currentbgColor = this.registrationForm.controls.bgcolor.value;
+  }
+
   createBarcode() {
     this.barcodeScanner.encode(this.barcodeScanner.Encode.TEXT_TYPE, this.inputData).then((encodedData) => {
       console.log(encodedData);
@@ -102,9 +114,10 @@ export class Tab5Page  {
     this.form.name = this.registrationForm.controls.name.value;
     this.form.phone = this.registrationForm.controls.phone.value;
     this.form.code = this.registrationForm.controls.code.value;
+    this.form.color = this.registrationForm.controls.color.value;
+    this.form.bgcolor = this.registrationForm.controls.bgcolor.value;
     this.presentModal();
   }
-
 
   async presentModal() {
     const modal = await this.modalController.create({
@@ -115,6 +128,8 @@ export class Tab5Page  {
         name: this.form.name,
         phone: this.form.phone,
         code: this.form.code,
+        color: this.form.color,
+        bgcolor: this.form.bgcolor,
         modalConfig: {
           isScanner : true,
         }
@@ -133,7 +148,6 @@ export class Tab5Page  {
     return await modal.present();
   }
 
-  
   refuse() {
     this.toggle();
 
@@ -158,6 +172,7 @@ export class Tab5Page  {
     console.log(this.registrationForm.value);
     this.SubmittedArray.push(this.registrationForm.value);
     this.ClearForm();
+    this.ResetColor();
 
     this.toast.ToastInfo = {
       header: 'Biểu mẫu:',
@@ -172,11 +187,16 @@ export class Tab5Page  {
       'name': '',
       'phone': '',
       'code': '',
+      'color': '',
+      'bgcolor': '',
     });
     this.toggle();
   }
 
-
+  ResetColor() {
+    this.currentColor = '#FFFFFF';
+    this.currentbgColor = '#3880FF';
+  }
 
   toggle(){
     this.toggleview = !this.toggleview;
@@ -256,6 +276,14 @@ export class Tab5Page  {
     return this.registrationForm.get('code');
   }
 
+  get color() {
+    return this.registrationForm.get('color');
+  }
+
+  get bgcolor() {
+    return this.registrationForm.get('bgcolor');
+  }
+
   public errorMessages = {
     name: [
       { type: 'required', message: '*bắt buộc'},
@@ -271,6 +299,12 @@ export class Tab5Page  {
       { type: 'required', message: '*bắt buộc'},
       { type: 'pattern', message: '*Nhập thông tin phù hợp! '}
     ],
+    color: [
+      { type: 'required', message: '*bắt buộc'},
+    ],
+    bgcolor: [
+      { type: 'required', message: '*bắt buộc'},
+    ],
   }
 
 //                                    These are allow special characters for name, from lowercase to UPPERCASE, numbers excepted, space allowed, min length = 0;
@@ -278,6 +312,8 @@ export class Tab5Page  {
     name: ['', [Validators.required, Validators.maxLength(40), Validators.pattern("([a-zắằẳẵặăấầẩẫậâáàãảạđếềểễệêéèẻẽẹíìỉĩịốồổỗộôớờởỡợơóòõỏọứừửữựưúùủũụýỳỷỹỵA-ZẮẰẲẴẶĂẤẦẨẪẬÂÁÀÃẢẠĐẾỀỂỄỆÊÉÈẺẼẸÍÌỈĨỊỐỒỔỖỘÔỚỜỞỠỢƠÓÒÕỎỌỨỪỬỮỰƯÚÙỦŨỤÝỲỶỸỴ ]){0,}")]],
     phone: ['', [Validators.required, Validators.maxLength(11), Validators.pattern("^(0)[0-9]{9,}$")]],
     code: ['', [Validators.required, Validators.pattern("([a-zA-Z0-9]){0,}")]],
+    color: ['', [Validators.required]],
+    bgcolor: ['', [Validators.required]],
   })
   
 // Peter98's note:

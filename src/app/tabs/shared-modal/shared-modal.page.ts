@@ -15,6 +15,8 @@ export class SharedModalPage implements OnInit {
   @Input() email: any;
   @Input() addresses: any;
   @Input() code: any;
+  @Input() color: any;
+  @Input() bgcolor: any;
 
   modalConfig = null;
   _modalConfig = {

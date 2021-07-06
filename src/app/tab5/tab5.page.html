@@ -21,7 +21,7 @@
       <ion-col size="12" size-md="8" size-lg="6">
         <ion-card>
           <ion-label>
-            <div class="label"><b>Biểu mẫu lấy dữ liệu</b></div>
+            <div class="label" [ngStyle]="{'background-color': currentbgColor, 'color': currentColor}"><b>Biểu mẫu lấy dữ liệu</b></div>
           </ion-label>
           <form [formGroup]="registrationForm">
             <ion-item>
@@ -90,6 +90,32 @@
               </ion-input>
             </ion-item>
 
+            <ion-item>
+              <ion-label position="floating">
+                Chọn màu nền
+                <span *ngFor="let error of errorMessages.bgcolor">
+                  <ng-container *ngIf="bgcolor.hasError(error.type) && (bgcolor.dirty || bgcolor.touched)">
+                    <small class="error-message">{{error.message}}</small>
+                  </ng-container>
+                </span>
+              </ion-label>
+              <ion-input (change)="setbgColor($event)" class="colorPicker" type="color" id="bgcolor" placeholder="Hãy chọn màu nền" formControlName="bgcolor">
+              </ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label position="floating">
+                Chọn màu chữ
+                <span *ngFor="let error of errorMessages.color">
+                  <ng-container *ngIf="color.hasError(error.type) && (color.dirty || color.touched)">
+                    <small class="error-message">{{error.message}}</small>
+                  </ng-container>
+                </span>
+              </ion-label>
+              <ion-input (change)="setColor($event)" class="colorPicker" type="color" id="color" placeholder="Hãy chọn màu chữ" formControlName="color">
+              </ion-input>
+            </ion-item>
+
             <!-- <ion-item>
               <ion-label position="floating">
                 Email
@@ -150,13 +176,19 @@
       <ion-col size="12" size-md="6" size-lg="4" size-xl="3" *ngFor="let person of SubmittedArray, let i = index">
         <ion-card class="list">
           <ion-label>
-            <div class="label"><b>Dữ liệu {{i+1}}</b></div>
+            <div class="label" [ngStyle]="{ 'color': person.color, 'background-color': person.bgcolor }"><b>Dữ liệu {{i+1}}</b></div>
           </ion-label>
           <ion-item>
             <ion-input id="name" type="text" readonly>Họ và Tên: {{person.name}}</ion-input>
           </ion-item>
           <ion-item>
             <ion-input id="age" type="text" readonly>Số điện thoại: {{person.phone}}</ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input id="color" type="text" readonly>Màu chữ: {{person.color}}</ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input id="bgcolor" type="text" readonly>Màu nền: {{person.bgcolor}}</ion-input>
           </ion-item>
           <ion-item>
             <ion-input id="code" type="text" readonly>Mã BHYT: {{person.code}}</ion-input>

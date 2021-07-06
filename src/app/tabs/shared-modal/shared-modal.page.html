@@ -57,7 +57,7 @@
 
   <ion-card *ngIf="modalConfig.isScanner">
     <ion-label>
-      <div class="label"><b>{{modalConfig.scannerPageLabel}}</b></div>
+      <div class="label" [ngStyle]="{ 'color': color, 'background-color': bgcolor }"><b>{{modalConfig.scannerPageLabel}}</b></div>
     </ion-label>
     <ion-item>
       <ion-input id="name" type="text" readonly>Họ và Tên: {{name}}</ion-input>
@@ -70,6 +70,12 @@
     </ion-item> -->
     <ion-item>
       <ion-input id="phone" type="text" readonly>Số điện thoại: {{phone}}</ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input id="color" type="text" readonly>Màu chữ: {{color}}</ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input id="bgcolor" type="text" readonly>Màu nền: {{bgcolor}}</ion-input>
     </ion-item>
     <!-- <ion-item>
       <ion-input id="email" type="text" readonly>Email: {{email}}</ion-input>
