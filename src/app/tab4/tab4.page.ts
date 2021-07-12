@@ -28,7 +28,7 @@ export class Tab4Page {
     name: '',
     sex: '',
     age: '',
-    phone: '',
+    phones: {},
     email: '',
     addresses: {},
   };
@@ -49,7 +49,7 @@ export class Tab4Page {
     this.form.name = this.registrationForm.controls.name.value;
     this.form.sex = this.registrationForm.controls.sex.value;
     this.form.age = this.registrationForm.controls.age.value;
-    this.form.phone = this.registrationForm.controls.phone.value;
+    this.form.phones = this.registrationForm.controls.phones.value;
     this.form.email = this.registrationForm.controls.email.value;
     this.form.addresses = this.registrationForm.controls.addresses.value;
     this.presentModal();
@@ -65,7 +65,7 @@ export class Tab4Page {
         name: this.form.name,
         sex: this.form.sex,
         age: this.form.age,
-        phone: this.form.phone,
+        phones: this.form.phones,
         email: this.form.email,
         addresses: this.form.addresses,
         modalConfig: {
@@ -127,10 +127,13 @@ export class Tab4Page {
       'name': '',
       'sex': '',
       'age': '',
-      'phone': '',
+      'phones': {},
       'email': '',
       'addresses': {},
     });
+    debugger
+    this.phones.clear();
+    this.addresses.clear();
     this.toggle();
   }
 
@@ -212,6 +215,18 @@ export class Tab4Page {
   deleteAddress(addressIndex: number) {
     this.addresses.removeAt(addressIndex);
   }
+  
+  addPhone() {
+    const newPhone = this.formBuilder.group({
+      phone: ['', [Validators.required, Validators.maxLength(11), Validators.pattern("^(0)[0-9]{9,}$")]]
+    });
+  
+    this.phones.push(newPhone);
+  }
+
+  deletePhone(phoneIndex: number) {
+    this.phones.removeAt(phoneIndex);
+  }
 
   get name() {
     return this.registrationForm.get('name');
@@ -225,8 +240,8 @@ export class Tab4Page {
     return this.registrationForm.get('age');
   }
 
-  get phone() {
-    return this.registrationForm.get('phone');
+  get phones() {
+    return this.registrationForm.controls['phones'] as FormArray;
   }
 
   get email() {
@@ -251,7 +266,7 @@ export class Tab4Page {
       { type: 'min', message: "*Bạn không đủ tuổi..."},
       { type: 'max', message: "*Bạn già thế à!? "}
     ],
-    phone: [
+    phones: [
       { type: 'required', message: '*bắt buộc'},
       { type: 'maxlength', message: "*Số điện thoại không quá 11 số! "},
       { type: 'pattern', message: '*Nhập thông tin phù hợp! '}
@@ -272,7 +287,7 @@ export class Tab4Page {
     name: ['', [Validators.required, Validators.maxLength(40), Validators.pattern("([a-zắằẳẵặăấầẩẫậâáàãảạđếềểễệêéèẻẽẹíìỉĩịốồổỗộôớờởỡợơóòõỏọứừửữựưúùủũụýỳỷỹỵA-ZẮẰẲẴẶĂẤẦẨẪẬÂÁÀÃẢẠĐẾỀỂỄỆÊÉÈẺẼẸÍÌỈĨỊỐỒỔỖỘÔỚỜỞỠỢƠÓÒÕỎỌỨỪỬỮỰƯÚÙỦŨỤÝỲỶỸỴ ]){0,}")]],
     sex: ['', [Validators.required]],
     age: ['', [Validators.required, Validators.min(18), Validators.max(120)]],
-    phone: ['', [Validators.required, Validators.maxLength(11), Validators.pattern("^(0)[0-9]{9,}$")]],
+    phones: this.formBuilder.array([]),
     email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%+-]+@+([a-zA-Z0-9.-])+[.]+[a-zA-Z]{2,4}$')]],
     addresses: this.formBuilder.array([]),
   })

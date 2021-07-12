@@ -19,9 +19,11 @@
     <ion-item>
       <ion-input id="age" type="text" readonly>Tuổi: {{age}}</ion-input>
     </ion-item>
-    <ion-item>
-      <ion-input id="phone" type="text" readonly>Số điện thoại: {{phone}}</ion-input>
-    </ion-item>
+    <ng-container *ngFor="let t of phones, let i = index">
+      <ion-item>
+        <ion-input id="phone" type="text" readonly>Số điện thoại {{i+1}}: {{t.phone}}</ion-input>
+      </ion-item>
+    </ng-container>
     <ion-item>
       <ion-input id="email" type="text" readonly>Email: {{email}}</ion-input>
     </ion-item>

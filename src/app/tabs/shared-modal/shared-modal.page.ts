@@ -12,6 +12,7 @@ export class SharedModalPage implements OnInit {
   @Input() sex: string;
   @Input() age: number;
   @Input() phone: any;
+  @Input() phones: any;
   @Input() email: any;
   @Input() addresses: any;
   @Input() code: any;

@@ -84,15 +84,31 @@
                   </ng-container>
                 </span>
               </ion-label>
-              <ion-input type="text" id="phone" placeholder="Bắt đầu bằng số 0." formControlName="phone">
-              </ion-input>
+
+              <ng-container formArrayName="phones">
+                <ng-container *ngFor="let newPhone of phones.controls; let i = index">
+                  <div class="phoneInput" [formGroup]="newPhone">
+                    <ion-input type="text" id="phone" formControlName="phone" placeholder="Bắt đầu bằng số 0."></ion-input>
+                    <ion-button (click)="deletePhone(i)">
+                      <ion-icon name="close-outline">Remove</ion-icon>
+                    </ion-button>
+                  </div>
+                </ng-container>
+              </ng-container>
+
+              <div class="addButton">
+                <ion-button (click)="addPhone()">
+                  <ion-icon name="add-outline">Add</ion-icon>
+                </ion-button>
+              </div>
+
             </ion-item>
 
             <ion-item>
               <ion-label position="floating">
                 Email
                 <span *ngFor="let error of errorMessages.email">
-                  <ng-container *ngIf="email.hasError(error.type) && (email.dirty || phone.email)">
+                  <ng-container *ngIf="email.hasError(error.type) && (email.dirty || email.touched)">
                     <small class="error-message">{{error.message}}</small>
                   </ng-container>
                 </span>
@@ -102,7 +118,7 @@
             </ion-item>
 
             <ion-item>
-              <ion-label position="floating" (click)="addAddress()">
+              <ion-label position="floating">
                 Địa chỉ
                 <span *ngFor="let error of errorMessages.address">
                   <ng-container *ngIf="address.hasError(error.type) && (address.dirty || address.touched)">
@@ -152,9 +168,11 @@
           <ion-item>
             <ion-input id="age" type="text" readonly>Tuổi: {{person.age}}</ion-input>
           </ion-item>
-          <ion-item>
-            <ion-input id="phone" type="text" readonly>Số điện thoại: {{person.phone}}</ion-input>
-          </ion-item>
+          <ng-container *ngFor="let t of person.phones, let i = index">
+            <ion-item>
+              <ion-input id="phone" type="text" readonly>Số điện thoại {{i+1}}: {{t.phone}}</ion-input>
+            </ion-item>
+          </ng-container>
           <ion-item>
             <ion-input id="email" type="text" readonly>Email: {{person.email}}</ion-input>
           </ion-item>
