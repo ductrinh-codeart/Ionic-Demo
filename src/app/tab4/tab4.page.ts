@@ -131,7 +131,6 @@ export class Tab4Page {
       'email': '',
       'addresses': {},
     });
-    debugger
     this.phones.clear();
     this.addresses.clear();
     this.toggle();

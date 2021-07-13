@@ -39,7 +39,10 @@ const routes: Routes = [
         path: 'tab8',
         loadChildren: () => import('../tab8/tab8.module').then( m => m.Tab8PageModule)
       },
-    
+      {
+        path: 'tab9',
+        loadChildren: () => import('../tab9/tab9.module').then( m => m.Tab9PageModule)
+      },
     ]
   },
   {

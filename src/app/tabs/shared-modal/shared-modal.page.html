@@ -109,4 +109,70 @@
     </div>
   </ion-card>
 
+  
+  <ion-card *ngIf="modalConfig.isAPIDemo">
+    <ion-label>
+      <div class="label"><b>{{modalConfig.APIDemoLabel}}</b></div>
+    </ion-label>
+    <ion-item>
+      <ion-label position="floating">Department Name</ion-label>
+      <ion-input id="DepartmentName" [(ngModel)]="DepartmentName" type="text" placeholder="Insert Department Name"></ion-input>
+    </ion-item>
+
+    <div>
+      <ion-grid>
+        <ion-row class="center" style="display: block;">
+          <ion-text>
+            <b>Confirm save?</b>
+          </ion-text>
+        </ion-row>
+        <ion-row class="center">
+          <ion-col>
+            <ion-button color="danger" (click)="refuse()">
+              <ion-icon name="close-outline"></ion-icon>
+            </ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button color="success" (click)="accept()">
+              <ion-icon name="checkmark-outline"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </ion-card>
+
+  <ion-card *ngIf="modalConfig.isEditDep">
+    <ion-label>
+      <div class="label"><b>{{modalConfig.EditDepLabel}}</b></div>
+    </ion-label>
+
+    <ion-item>
+      <ion-label position="floating">Department Name</ion-label>
+      <ion-input id="DepartmentName" [(ngModel)]="DepartmentName" type="text" placeholder="Insert Department Name"></ion-input>
+    </ion-item>
+
+    <div>
+      <ion-grid>
+        <ion-row class="center" style="display: block;">
+          <ion-text>
+            <b>Confirm save?</b>
+          </ion-text>
+        </ion-row>
+        <ion-row class="center">
+          <ion-col>
+            <ion-button color="danger" (click)="refuse()">
+              <ion-icon name="close-outline"></ion-icon>
+            </ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button color="success" (click)="accept()">
+              <ion-icon name="checkmark-outline"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </ion-card>
+
 </ion-content>

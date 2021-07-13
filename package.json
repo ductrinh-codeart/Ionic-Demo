@@ -26,6 +26,7 @@
     "@ionic/angular": "^5.5.2",
     "@ionic/pwa-elements": "^3.0.2",
     "@swimlane/ngx-datatable": "^19.0.0",
+    "bootstrap": "^5.0.2",
     "cordova-android": "9.1.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",

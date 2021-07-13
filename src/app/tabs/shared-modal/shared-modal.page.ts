@@ -19,6 +19,10 @@ export class SharedModalPage implements OnInit {
   @Input() color: any;
   @Input() bgcolor: any;
 
+  @Input() modalType: any;
+  @Input() DepartmentId: any;
+  @Input() DepartmentName: any;
+
   modalConfig = null;
   _modalConfig = {
     isScanner : false,
@@ -26,6 +30,12 @@ export class SharedModalPage implements OnInit {
 
     isFormInput: false,
     formInputLabel: 'Form Input Demo',
+
+    isAPIDemo: false,
+    APIDemoLabel: 'API Demo',
+
+    isEditDep: false,
+    EditDepLabel: 'Edit Department',
   }
 
   buttonValue;
@@ -52,6 +62,9 @@ export class SharedModalPage implements OnInit {
   dismiss() {
     this.modalController.dismiss({
       modalValue: this.buttonValue,
+      modalType: this.modalType,
+      DepartmentId: this.DepartmentId,
+      DepartmentName: this.DepartmentName,
     });
   }
 }

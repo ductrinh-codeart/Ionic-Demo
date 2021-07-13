@@ -1,0 +1,32 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title title='Basic Example of API Service and Database retrieve.'>
+      WebAPI Demo
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">WebAPI Demo</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6">
+        <ion-button (click)="ShowDepartment()">Department</ion-button>
+      </ion-col>
+      <ion-col size="6">
+        <ion-button (click)="ShowEmployee()">Employee</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <div class="ion-padding">
+    <app-department *ngIf="department"></app-department>
+    <app-employee *ngIf="employee"></app-employee>
+  </div>
+
+</ion-content>
