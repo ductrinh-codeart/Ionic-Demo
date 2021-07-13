@@ -1,3 +1,40 @@
-<p>
-  employee works!
-</p>
+<ion-button style="float:right;" (click)="presentModal()">
+  Add Employee
+</ion-button>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>
+        EmployeeId
+        <input [(ngModel)]="EmployeeIdFilter" (keyup)="FilterFn()" placeholder="Filter">
+      </th>
+      <th>
+        EmployeeName
+        <input [(ngModel)]="EmployeeNameFilter" (keyup)="FilterFn()" placeholder="Filter">
+      </th>
+      <th>
+        Department
+        <input [(ngModel)]="DepartmentNameFilter" (keyup)="FilterFn()" placeholder="Filter">
+      </th>
+      <th>DateOfJoining</th>
+      <th>Options</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let dataItem of EmployeeList">
+        <td>{{dataItem.EmployeeId}}</td>
+        <td>{{dataItem.EmployeeName}}</td>
+        <td>{{dataItem.Department}}</td>
+        <td>{{dataItem.DateOfJoining}}</td>
+          <td>
+            <ion-button (click)="presentEditModal(dataItem)">
+              <ion-icon name="pencil-outline"></ion-icon>
+            </ion-button>
+            <ion-button (click)="deleteEmp(dataItem)">
+              <ion-icon name="trash-outline"></ion-icon>
+            </ion-button>
+          </td>
+    </tr>
+  </tbody>
+</table>

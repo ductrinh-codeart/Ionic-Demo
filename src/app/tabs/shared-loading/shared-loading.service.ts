@@ -34,7 +34,7 @@ export class SharedLoadingService {
     if (this.router.url == "/tabs/tab9"){
       this.toast.ToastInfo = {
         header: 'API Demo:',
-        message: 'Added to Department List!',
+        message: 'Added to List!',
         color: 'success',
       }
       this.toast.presentToast();

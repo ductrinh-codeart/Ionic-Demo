@@ -28,9 +28,9 @@
       <ion-input id="email" type="text" readonly>Email: {{email}}</ion-input>
     </ion-item>
     <ng-container *ngFor="let t of addresses, let i = index">
-    <ion-item>
-      <ion-input id="address" type="text" readonly>Địa chỉ {{i+1}}: {{t.address}}</ion-input>
-    </ion-item>
+      <ion-item>
+        <ion-input id="address" type="text" readonly>Địa chỉ {{i+1}}: {{t.address}}</ion-input>
+      </ion-item>
     </ng-container>
 
     <div>
@@ -59,7 +59,8 @@
 
   <ion-card *ngIf="modalConfig.isScanner">
     <ion-label>
-      <div class="label" [ngStyle]="{ 'color': color, 'background-color': bgcolor }"><b>{{modalConfig.scannerPageLabel}}</b></div>
+      <div class="label" [ngStyle]="{ 'color': color, 'background-color': bgcolor }">
+        <b>{{modalConfig.scannerPageLabel}}</b></div>
     </ion-label>
     <ion-item>
       <ion-input id="name" type="text" readonly>Họ và Tên: {{name}}</ion-input>
@@ -109,14 +110,15 @@
     </div>
   </ion-card>
 
-  
-  <ion-card *ngIf="modalConfig.isAPIDemo">
+
+  <ion-card style="width: 95% !important;" *ngIf="modalConfig.isAddDep">
     <ion-label>
-      <div class="label"><b>{{modalConfig.APIDemoLabel}}</b></div>
+      <div class="label"><b>{{modalConfig.AddDepLabel}}</b></div>
     </ion-label>
     <ion-item>
       <ion-label position="floating">Department Name</ion-label>
-      <ion-input id="DepartmentName" [(ngModel)]="DepartmentName" type="text" placeholder="Insert Department Name"></ion-input>
+      <ion-input id="DepartmentName" [(ngModel)]="DepartmentName" type="text" placeholder="Insert Department Name">
+      </ion-input>
     </ion-item>
 
     <div>
@@ -142,15 +144,145 @@
     </div>
   </ion-card>
 
-  <ion-card *ngIf="modalConfig.isEditDep">
+  <ion-card style="width: 95% !important;" *ngIf="modalConfig.isEditDep">
     <ion-label>
       <div class="label"><b>{{modalConfig.EditDepLabel}}</b></div>
     </ion-label>
 
     <ion-item>
       <ion-label position="floating">Department Name</ion-label>
-      <ion-input id="DepartmentName" [(ngModel)]="DepartmentName" type="text" placeholder="Insert Department Name"></ion-input>
+      <ion-input id="DepartmentName" [(ngModel)]="DepartmentName" type="text" placeholder="Insert Department Name">
+      </ion-input>
     </ion-item>
+
+    <div>
+      <ion-grid>
+        <ion-row class="center" style="display: block;">
+          <ion-text>
+            <b>Confirm save?</b>
+          </ion-text>
+        </ion-row>
+        <ion-row class="center">
+          <ion-col>
+            <ion-button color="danger" (click)="refuse()">
+              <ion-icon name="close-outline"></ion-icon>
+            </ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button color="success" (click)="accept()">
+              <ion-icon name="checkmark-outline"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </ion-card>
+
+
+
+  <ion-card style="width: 95% !important;" *ngIf="modalConfig.isAddEmp">
+    <ion-label>
+      <div class="label"><b>{{modalConfig.AddEmpLabel}}</b></div>
+    </ion-label>
+
+    <div style="display: flex;" class="ion-padding">
+      <div style="width:60%;">
+        <ion-item>
+          <ion-label position="floating">Employee Name</ion-label>
+          <ion-input id="EmployeeName" [(ngModel)]="EmployeeName" type="text" placeholder="Insert Employee Name">
+          </ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Department</ion-label>
+          <!-- <ion-input id="Department" [(ngModel)]="Department" type="text" placeholder="Insert Department Name"></ion-input> -->
+          <ion-select [(ngModel)]="Department" placeholder="Select One">
+            <ion-select-option disabled>---Select---</ion-select-option>
+            <ion-select-option *ngFor="let dep of DepartmentList">{{dep.DepartmentName}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Date Of Joining</ion-label>
+          <ion-input id="DateOfJoining" [(ngModel)]="DateOfJoining" type="date"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Avatar</ion-label>
+          <ion-input id="PhotoFileName" [(ngModel)]="PhotoFileName" type="file" (change)="uploadPhoto($event)"
+          placeholder="Insert Department Name">
+          </ion-input>
+        </ion-item>
+      </div>
+
+      <div style="width:40%;">
+        <img class="ion-padding" *ngIf="PhotoFilePath" [src]=PhotoFilePath height="200;" width="200;" >
+      </div>
+    </div>
+
+
+    <div>
+      <ion-grid>
+        <ion-row class="center" style="display: block;">
+          <ion-text>
+            <b>Confirm save?</b>
+          </ion-text>
+        </ion-row>
+        <ion-row class="center">
+          <ion-col>
+            <ion-button color="danger" (click)="refuse()">
+              <ion-icon name="close-outline"></ion-icon>
+            </ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button color="success" (click)="accept()">
+              <ion-icon name="checkmark-outline"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </ion-card>
+
+  <ion-card style="width: 95% !important;" *ngIf="modalConfig.isEditEmp">
+    <ion-label>
+      <div class="label"><b>{{modalConfig.EditEmpLabel}}</b></div>
+    </ion-label>
+
+    <div style="display: flex;" class="ion-padding">
+      <div style="width:60%;">
+        <ion-item>
+          <ion-label position="floating">Employee Name</ion-label>
+          <ion-input id="EmployeeName" [(ngModel)]="EmployeeName" type="text" placeholder="Insert Employee Name">
+          </ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Department</ion-label>
+          <!-- <ion-input id="Department" [(ngModel)]="Department" type="text" placeholder="Insert Department Name"></ion-input> -->
+          <ion-select [(ngModel)]="Department" placeholder="Select One">
+            <ion-select-option disabled>---Select---</ion-select-option>
+            <ion-select-option *ngFor="let dep of DepartmentList">{{dep.DepartmentName}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>Date Of Joining</ion-label>
+          <ion-input id="DateOfJoining" [(ngModel)]="DateOfJoining" type="date"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Avatar</ion-label>
+          <ion-input id="PhotoFileName" [(ngModel)]="PhotoFileName" type="file" (change)="uploadPhoto($event)"
+          placeholder="Insert Department Name">
+          </ion-input>
+        </ion-item>
+      </div>
+
+      <div style="width:40%;">
+        <img class="ion-padding" *ngIf="PhotoFilePath" [src]=PhotoFilePath height="200;" width="200;">
+      </div>
+    </div>
 
     <div>
       <ion-grid>

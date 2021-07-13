@@ -10,7 +10,9 @@ export class Tab9Page implements OnInit {
   employee: boolean = false;
   department: boolean = false;
 
-  constructor() { }
+  constructor() {
+    this.alert();
+   }
 
   ShowDepartment() {
     this.department = true;
@@ -22,7 +24,9 @@ export class Tab9Page implements OnInit {
     this.employee = true;
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
+  alert(){
+    alert('To use this page functions, first to open WebAPI with Visual Studio')
+  }
 }

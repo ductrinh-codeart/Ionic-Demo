@@ -21,6 +21,11 @@ export class ShowDepComponent implements OnInit {
   DepartmentId;
   DepartmentName;
 
+  //filter
+  DepartmentIdFilter: string = "";
+  DepartmentNameFilter: string = "";
+  DepartmentListWithoutFilter: any = [];
+
   constructor(
     private service: SharedService,
     public toast: SharedToastService,
@@ -40,7 +45,22 @@ export class ShowDepComponent implements OnInit {
   refreshDepList() {
     this.service.getDepList().subscribe(data => {
       this.DepartmentList = data;
+      this.DepartmentListWithoutFilter = data;
     })
+  }
+
+  FilterFn(){
+    var DepartmentIdFilter = this.DepartmentIdFilter;
+    var DepartmentNameFilter = this.DepartmentNameFilter;
+
+    this.DepartmentList = this.DepartmentListWithoutFilter.filter(function(el){
+      return el.DepartmentId.toString().toLowerCase().includes(
+        DepartmentIdFilter.toString().trim().toLowerCase()
+      )&&
+      el.DepartmentName.toString().toLowerCase().includes(
+        DepartmentNameFilter.toString().trim().toLowerCase()
+      )
+    });
   }
 
   async presentModal() {
@@ -53,7 +73,7 @@ export class ShowDepComponent implements OnInit {
         modalType: 'add',
 
         modalConfig: {
-          isAPIDemo: true,
+          isAddDep: true,
         }
       },
     });
@@ -75,7 +95,6 @@ export class ShowDepComponent implements OnInit {
   }
 
   async presentEditModal(item) {
-    debugger
     const modal = await this.modalController.create({
       component: SharedModalPage,
       cssClass: 'modal-class',
@@ -135,17 +154,17 @@ export class ShowDepComponent implements OnInit {
     // seperate this between add new or edit existing.
     if (this.modalType == 'add') {
       var val = {
-        DepartmentId: this.DepartmentId,
-        DepartmentName: this.DepartmentName
+        DepartmentId:     this.DepartmentId,
+        DepartmentName:   this.DepartmentName
       };
       this.service.addDepartment(val).subscribe(res => {
         this.refreshDepList();
       })
     }
-    else {
+    else if (this.modalType == 'edit') {
       var val = {
-        DepartmentId: this.DepartmentId,
-        DepartmentName: this.DepartmentName
+        DepartmentId:     this.DepartmentId,
+        DepartmentName:   this.DepartmentName
       };
       this.service.updateDepartment(val).subscribe(res => {
         this.refreshDepList();
@@ -154,17 +173,19 @@ export class ShowDepComponent implements OnInit {
   }
 
   deleteDep(item) {
-    this.service.deleteDepartment(item.DepartmentId).subscribe(res => {
-      this.refreshDepList();
+    if (confirm('Are you sure?')) {
+      this.service.deleteDepartment(item.DepartmentId).subscribe(res => {
+        this.refreshDepList();
 
-      this.toast.ToastInfo = {
-        header: 'API Demo:',
-        message: 'Deleted Department!',
-        color: 'success',
-      }
-      this.toast.presentToast();
-      
-    })
+        this.toast.ToastInfo = {
+          header: 'API Demo:',
+          message: 'Deleted Department!',
+          color: 'success',
+        }
+        this.toast.presentToast();
+
+      })
+    }
   }
 
 
