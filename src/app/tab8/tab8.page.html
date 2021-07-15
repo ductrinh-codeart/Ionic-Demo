@@ -26,7 +26,7 @@
                     <div class="form-row">
                         <div class="form-group">
                             <label>Number of Tickets</label>
-                            <select formControlName="numberOfTickets" class="form-control" (change)="onChangeTickets($event)" [ngClass]="{ 'is-invalid': submitted && f.numberOfTickets.errors }">
+                            <select formControlName="numberOfTickets" (change)="onChangeTickets($event)" [ngClass]="{ 'is-invalid': submitted && f.numberOfTickets.errors }">
                                 <option value=""></option>
                                 <option *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]">{{i}}</option>
                             </select>
@@ -51,7 +51,7 @@
                                       <span class="Error-msg" *ngIf="ticket.controls.name.errors.pattern"><small>*can't have number</small></span>
                                     </ng-container>
                                   </ion-label>
-                                  <ion-input type="text" formControlName="name" class="form-control" [ngClass]="{ 'is-invalid': submitted && ticket.controls.name.errors }"></ion-input>
+                                  <ion-input type="text" formControlName="name" [ngClass]="{ 'is-invalid': submitted && ticket.controls.name.errors }"></ion-input>
                                 </ion-item>
                               </ion-col>
                               <ion-col size="12" size-md="6">
@@ -63,7 +63,7 @@
                                       <span class="Error-msg" *ngIf="ticket.controls.email.errors.pattern"><small>*must be valid</small></span>
                                     </ng-container>
                                   </ion-label>
-                                  <ion-input type="text" formControlName="email" class="form-control" [ngClass]="{ 'is-invalid': submitted && ticket.controls.email.errors }"></ion-input>
+                                  <ion-input type="text" formControlName="email" [ngClass]="{ 'is-invalid': submitted && ticket.controls.email.errors }"></ion-input>
                                 </ion-item>
                               </ion-col>
                             </ion-row>
@@ -72,9 +72,9 @@
                     </div>
                 </div>
                 <div class="card-footer text-center border-top-0">
-                    <button class="btn btn-primary mr-1">Buy Tickets</button>
-                    <button class="btn btn-secondary mr-1" type="reset" (click)="onReset()">Reset</button>
-                    <button class="btn btn-secondary" type="button" (click)="onClear()">Clear</button>
+                    <ion-button (click)="onSubmit()">Buy Tickets</ion-button>
+                    <ion-button (click)="onReset()">Reset</ion-button>
+                    <ion-button (click)="onClear()">Clear</ion-button>
                 </div>
             </div>
         </form>

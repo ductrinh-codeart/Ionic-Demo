@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -14,6 +15,7 @@ import { Tab5Page } from './tab5.page';
     IonicModule,
     FormsModule,
     ReactiveFormsModule,
+    RouterModule.forChild([{ path: '', component: Tab5Page }]),
     Tab5PageRoutingModule
   ],
   declarations: [Tab5Page]

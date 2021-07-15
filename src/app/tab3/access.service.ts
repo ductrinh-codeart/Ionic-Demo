@@ -34,6 +34,7 @@ export class AccessService {
   async lockApp () {
     const modal = await this.modalCtrl.create({
       component: LockedPage,
+      backdropDismiss: false,
     });
     await modal.present();
     modal.onDidDismiss().then(result => {

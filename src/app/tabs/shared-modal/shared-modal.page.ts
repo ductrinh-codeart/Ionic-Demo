@@ -79,6 +79,7 @@ export class SharedModalPage implements OnInit {
   }
 
   uploadPhoto(event){
+    debugger
     var file = event.target.files[0];
     const formData:FormData = new FormData();
     formData.append('uploadedFile',file,file.name);

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Plugins } from  '@capacitor/core';
 import { ModalController } from '@ionic/angular';
+import { SharedToastService } from '../../tabs/shared-toast/shared-toast.service';
 
 const { BiometricAuth } = Plugins;
 
@@ -16,7 +17,10 @@ export class LockedPage implements OnInit {
   password = '';
   hasBiometricAuth = false;
 
-  constructor(private modalCtrl: ModalController) {
+  constructor(
+    private modalCtrl: ModalController,
+    public toast: SharedToastService,
+    ) {
     
    }
 
@@ -42,7 +46,23 @@ export class LockedPage implements OnInit {
 
   unlock () {
     if (this.password == '0109') {
+      this.toast.ToastInfo = {
+        header: "Security Check:",
+        message: "Mật khẩu chính xác!",
+        color: 'success',
+      }
+
+      this.toast.presentToast();
       this.dismissLockScreen();
+    }
+    else {
+      this.toast.ToastInfo = {
+        header: "Security Check:",
+        message: "Mật khẩu không đúng, vui lòng kiểm tra lại!",
+        color: 'danger',
+      }
+
+      this.toast.presentToast();
     }
   }
 

@@ -7,11 +7,17 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, FormsModule, IonicModule.forRoot(), AppRoutingModule],
+  imports: [
+    BrowserModule, 
+    FormsModule,
+    HttpClientModule, 
+    IonicModule.forRoot(), 
+    AppRoutingModule],
   providers: [
     Camera,
     BarcodeScanner,
