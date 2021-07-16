@@ -1,0 +1,88 @@
+<div class="view-header">
+  Table View
+
+  <ion-button class="add-task" (click)="presentModal()">
+    Add Task
+  </ion-button>
+</div>
+
+<ion-grid class="view-content">
+  <!-- Title row -->
+  <ion-row class="row-css">
+    <ion-col size='1' class="padding-left">
+      <div>Id</div>
+    </ion-col>
+    <ion-col size='5' class="padding-left">
+      <div>
+        Name
+        <input style="margin-left: 50px;" [(ngModel)]="TaskNameFilter" (keyup)="FilterFn()" placeholder="Filter">
+      </div>
+    </ion-col>
+    <ion-col size='1' class="padding-left">
+      <div>Estimate</div>
+    </ion-col>
+    <ion-col size='2' style="padding-left: 5px;">
+      <div>Priority</div>
+    </ion-col>
+    <ion-col size='1' style="text-align: center;">
+      <div>Status</div>
+    </ion-col>
+    <ion-col size='2' style="text-align: center;">
+      <div>Option</div>
+    </ion-col>
+  </ion-row>
+
+  <ng-container  style="overflow: scroll;">
+  <ion-row *ngFor="let dataItem of TaskList">
+
+    <ion-col size='1' class="padding-left">
+      <div>{{dataItem.TaskId}}</div>
+    </ion-col>
+    <ion-col size='5' class="padding-left">
+      <div title={{dataItem.Description}}>{{dataItem.TaskName}}</div>
+    </ion-col>
+    <ion-col size='1' class="padding-left">
+      <div title="Create On: {{dataItem.CreateOn}}">{{dataItem.Estimate}}</div>
+    </ion-col>
+    <!-- Priority -->
+    <ion-col size='2'>
+      <div class="priority1" *ngIf="dataItem.PriorityId == 1">
+        <span>Urgent & Important</span>
+      </div>
+      <div class="priority2" *ngIf="dataItem.PriorityId == 2">
+        <span>Important, Not Urgent</span>
+      </div>
+      <div class="priority3" *ngIf="dataItem.PriorityId == 3">
+        <span>Not Important, Urgent</span>
+      </div>
+      <div class="priority4" *ngIf="dataItem.PriorityId == 4">
+        <span>Not Important & Urgent</span>
+      </div>
+    </ion-col>
+    <!-- Status -->
+    <ion-col size='1' style="text-align: center;">
+      <div class="status1" *ngIf="dataItem.StatusId == 1">
+        <span>Pending</span>
+      </div>
+      <div class="status2" *ngIf="dataItem.StatusId == 2">
+        <span>Working</span>
+      </div>
+      <div class="status3" *ngIf="dataItem.StatusId == 3" title="Complete On: {{dataItem.CompleteOn}}">
+        <span>Done</span>
+      </div>
+    </ion-col>
+
+    <ion-col size='2' style="justify-content: space-around; display: flex;">
+      <div style="line-height: 3;">
+        <ion-button (click)="presentEditModal(dataItem)">
+          <ion-icon name="pencil-outline"></ion-icon>
+        </ion-button>
+        <ion-button (click)="deleteTask(dataItem)">
+          <ion-icon name="trash-outline"></ion-icon>
+        </ion-button>
+      </div>
+    </ion-col>
+
+  </ion-row>
+</ng-container>
+</ion-grid>

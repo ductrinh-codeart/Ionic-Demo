@@ -1,0 +1,77 @@
+.view-header {
+    height: 10%;
+    background: antiquewhite;
+    font-size: 1.5rem;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 4.5rem;
+}
+
+.add-task {
+    float: right;
+    margin: 20px 20px 20px 0;
+}
+
+ion-card-header{
+    padding: 0px;
+    height: 50px;
+    text-align: center;
+
+    &.priority1{
+        background-color: #f65c5c;
+        color: #000;
+    }
+    &.priority2{
+        background-color: #5ce4f6;
+        color: #000;
+    }
+    &.priority3{
+        background-color: #f6f45c;
+        color: #000;
+    }
+    &.priority4{
+        background-color: #88f65c;
+        color: #000;
+    }
+    div{
+        font-weight: 600;
+        line-height: 3;
+    }
+}
+
+ion-card-content {
+    overflow-y: auto;
+    min-height: 200px;
+    max-height: 420px;
+    padding: 0px 8px 8px 8px;
+    ion-grid {
+        padding: 5px 0px;
+        border-bottom: 0.5px dashed;
+    }
+
+    ion-grid:last-child{
+        border-bottom: none !important;
+    }
+}
+
+.status1 {
+    background-color: #173F5F;
+    color: rgb(255, 255, 255);
+}
+.status2 {
+    background-color: #F6D55C;
+    color: #000;
+}
+.status3 {
+    background-color: #88f65c;
+    color: #000;
+}
+
+.Col-Name{
+    div {
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+    padding: 5px 0;
+}

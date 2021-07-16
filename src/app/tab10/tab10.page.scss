@@ -1,0 +1,20 @@
+.float-right {
+    display: block;
+    text-align: right;
+}
+
+ion-grid {
+    height: 100%;
+}
+
+ion-row.row-height { 
+    height: 95% !important;
+}
+
+ion-card {
+    padding: 0;
+    overflow-y: auto;
+    max-height: calc(100vh - 20%);
+    min-height: calc(100vh - 30%);
+
+}

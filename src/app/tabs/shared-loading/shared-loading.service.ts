@@ -30,23 +30,31 @@ export class SharedLoadingService {
     this.callToast();
   }
 
-  callToast(){
-    if (this.router.url == "/tabs/tab9"){
-      this.toast.ToastInfo = {
-        header: 'API Demo:',
-        message: 'Added to List!',
-        color: 'success',
-      }
-      this.toast.presentToast();
-    }
-    else {
-      this.toast.ToastInfo = {
-        header: 'Biểu mẫu:',
-        message: 'Đã xóa toàn bộ dữ liệu!',
-        color: 'success',
-      }
-      this.toast.presentToast();
+  // callToast(){
+  //   if (this.router.url == "/tabs/tab9"){
+  //     this.toast.ToastInfo = {
+  //       header: 'API Demo:',
+  //       message: 'Added to List!',
+  //       color: 'success',
+  //     }
+  //     this.toast.presentToast();
+  //   }
+  //   else {
+  //     this.toast.ToastInfo = {
+  //       header: 'Biểu mẫu:',
+  //       message: 'Đã xóa toàn bộ dữ liệu!',
+  //       color: 'success',
+  //     }
+  //     this.toast.presentToast();
+  //   }
+  // }
 
+  callToast(){
+    this.toast.ToastInfo = {
+      header: 'Biểu mẫu:',
+      message: 'Đã xóa toàn bộ dữ liệu!',
+      color: 'success',
     }
+    this.toast.presentToast();
   }
 }

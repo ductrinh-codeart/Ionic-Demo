@@ -98,13 +98,13 @@ export class EmployeeComponent implements OnInit {
 
     modal.onDidDismiss().then((result: any) => {
 
-      this.modalValue = result.data.modalValue;
-      this.modalType = result.data.modalType;
+      this.modalValue     =   result.data.modalValue;
+      this.modalType      =   result.data.modalType;
 
-      this.EmployeeName = result.data.EmployeeName;
-      this.Department = result.data.Department;
-      this.DateOfJoining = result.data.DateOfJoining;
-      this.PhotoFileName = result.data.PhotoFileName;
+      this.EmployeeName   =   result.data.EmployeeName;
+      this.Department     =   result.data.Department;
+      this.DateOfJoining  =   result.data.DateOfJoining;
+      this.PhotoFileName  =   result.data.PhotoFileName;
       
       if (this.modalValue == 'refuse') {
         this.refuse();
@@ -124,12 +124,12 @@ export class EmployeeComponent implements OnInit {
       componentProps: {
 
         // can pass data into modal here!
-        EmployeeId: item.EmployeeId,
-        EmployeeName: item.EmployeeName,
-        Department: item.Department,
-        DateOfJoining: item.DateOfJoining,
-        PhotoFileName: item.PhotoFileName,
-        PhotoFilePath : this.service.PhotoUrl + item.PhotoFileName,
+        EmployeeId:     item.EmployeeId,
+        EmployeeName:   item.EmployeeName,
+        Department:     item.Department,
+        DateOfJoining:  item.DateOfJoining,
+        PhotoFileName:  item.PhotoFileName,
+        PhotoFilePath:  this.service.PhotoUrl + item.PhotoFileName,
 
         modalType: 'edit',
         DepartmentList: this.DepartmentList,
@@ -142,14 +142,14 @@ export class EmployeeComponent implements OnInit {
 
     modal.onDidDismiss().then((result: any) => {
 
-      this.modalValue = result.data.modalValue;
-      this.modalType = result.data.modalType;
+      this.modalValue     =   result.data.modalValue;
+      this.modalType      =   result.data.modalType;
 
-      this.EmployeeId = result.data.EmployeeId;
-      this.EmployeeName = result.data.EmployeeName;
-      this.Department = result.data.Department;
-      this.DateOfJoining = result.data.DateOfJoining;
-      this.PhotoFileName = result.data.PhotoFileName;
+      this.EmployeeId     =   result.data.EmployeeId;
+      this.EmployeeName   =   result.data.EmployeeName;
+      this.Department     =   result.data.Department;
+      this.DateOfJoining  =   result.data.DateOfJoining;
+      this.PhotoFileName  =   result.data.PhotoFileName;
 
       if (this.modalValue == 'refuse') {
         this.refuse();
@@ -194,7 +194,8 @@ export class EmployeeComponent implements OnInit {
       };
       this.service.addEmployee(val).subscribe(res => {
         this.refreshEmpList();
-      })
+      });
+      this.AddEditComplete();
     }
     else if (this.modalType == 'edit') {
       var val = {
@@ -206,7 +207,27 @@ export class EmployeeComponent implements OnInit {
       };
       this.service.updateEmployee(val).subscribe(res => {
         this.refreshEmpList();
-      })
+      });
+      this.AddEditComplete();
+    }
+  }
+
+  AddEditComplete(){
+    if (this.modalType == 'add') {
+      this.toast.ToastInfo = {
+        header: 'API Demo:',
+        message: 'Added Successfully!',
+        color: 'success',
+      }
+      this.toast.presentToast();
+    }
+    else {
+      this.toast.ToastInfo = {
+        header: 'API Demo:',
+        message: 'Edited Successfully!',
+        color: 'success',
+      }
+      this.toast.presentToast();
     }
   }
 

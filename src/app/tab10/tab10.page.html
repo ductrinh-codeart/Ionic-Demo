@@ -1,0 +1,41 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title title='Task Manager with API'>
+      Task Manager
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+
+<ion-content [fullscreen]="true" id='QRpage'>
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Task Manager</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+
+  <ion-grid style="overflow-y: hidden;">
+    <ion-row class="float-right">
+      <ion-col size="1">
+        <ion-button (click)="ShowTable()">Table</ion-button>
+      </ion-col>
+      <ion-col size="1">
+        <ion-button (click)="ShowPriority()">Priority</ion-button>
+      </ion-col>
+      <ion-col size="1">
+        <ion-button (click)="ShowStatus()">Status</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row class="row-height">
+      <ion-col>
+      <ion-card class="ion-padding" >
+        <app-table *ngIf="table"></app-table>
+        <app-priority *ngIf="priority"></app-priority>
+        <app-status *ngIf="status"></app-status>
+      </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

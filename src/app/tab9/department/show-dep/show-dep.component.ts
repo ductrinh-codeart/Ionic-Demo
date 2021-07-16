@@ -15,11 +15,11 @@ import { SharedService } from '../../shared.service';
 })
 export class ShowDepComponent implements OnInit {
 
-  link;
   modalType;
   modalValue;
   DepartmentId;
   DepartmentName;
+  DepartmentList: any = [];
 
   //filter
   DepartmentIdFilter: string = "";
@@ -35,8 +35,6 @@ export class ShowDepComponent implements OnInit {
   ) {
 
   }
-
-  DepartmentList: any = [];
 
   ngOnInit(): void {
     this.refreshDepList();
@@ -80,10 +78,10 @@ export class ShowDepComponent implements OnInit {
 
     modal.onDidDismiss().then((result: any) => {
 
-      this.modalValue = result.data.modalValue;
-      this.modalType = result.data.modalType;
+      this.modalValue       =   result.data.modalValue;
+      this.modalType        =   result.data.modalType;
 
-      this.DepartmentName = result.data.DepartmentName;
+      this.DepartmentName   =   result.data.DepartmentName;
       if (this.modalValue == 'refuse') {
         this.refuse();
       }
@@ -114,11 +112,11 @@ export class ShowDepComponent implements OnInit {
 
     modal.onDidDismiss().then((result: any) => {
 
-      this.modalValue = result.data.modalValue;
-      this.modalType = result.data.modalType;
+      this.modalValue     =   result.data.modalValue;
+      this.modalType      =   result.data.modalType;
 
-      this.DepartmentId = result.data.DepartmentId;
-      this.DepartmentName = result.data.DepartmentName;
+      this.DepartmentId   =   result.data.DepartmentId;
+      this.DepartmentName =   result.data.DepartmentName;
       if (this.modalValue == 'refuse') {
         this.refuse();
       }
@@ -159,7 +157,8 @@ export class ShowDepComponent implements OnInit {
       };
       this.service.addDepartment(val).subscribe(res => {
         this.refreshDepList();
-      })
+      });
+      this.AddEditComplete();
     }
     else if (this.modalType == 'edit') {
       var val = {
@@ -168,7 +167,27 @@ export class ShowDepComponent implements OnInit {
       };
       this.service.updateDepartment(val).subscribe(res => {
         this.refreshDepList();
-      })
+      });
+      this.AddEditComplete();
+    }
+  }
+
+  AddEditComplete(){
+    if (this.modalType == 'add') {
+      this.toast.ToastInfo = {
+        header: 'API Demo:',
+        message: 'Added Successfully!',
+        color: 'success',
+      }
+      this.toast.presentToast();
+    }
+    else {
+      this.toast.ToastInfo = {
+        header: 'API Demo:',
+        message: 'Edited Successfully!',
+        color: 'success',
+      }
+      this.toast.presentToast();
     }
   }
 

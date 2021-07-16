@@ -307,4 +307,158 @@
     </div>
   </ion-card>
 
+
+
+  <ion-card style="width: 95% !important;" *ngIf="modalConfig.isAddTask">
+    <ion-label>
+      <div class="label"><b>{{modalConfig.AddTaskLabel}}</b></div>
+    </ion-label>
+
+    <div style="display: flex; flex-direction: column;" class="ion-padding">
+
+        <ion-item>
+          <ion-label position="floating">Task Name</ion-label>
+          <ion-input id="TaskName" [(ngModel)]="TaskName" type="text" placeholder="Insert Task Name">
+          </ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Description</ion-label>
+          <ion-input id="Description" [(ngModel)]="Description" type="text" placeholder="Insert Description">
+          </ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Create On</ion-label>
+          <ion-input id="CreateOn" [(ngModel)]="CreateOn" type="date"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Estimate</ion-label>
+          <ion-input id="Estimate" [(ngModel)]="Estimate" type="date"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Complete On</ion-label>
+          <ion-input id="CompleteOn" [(ngModel)]="CompleteOn" type="date"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Priority</ion-label>
+          <ion-select [(ngModel)]="PriorityId" placeholder="Select One">
+            <ion-select-option disabled>---Select---</ion-select-option>
+            <ion-select-option *ngFor="let pri of PriorityList, let i = index" value={{i+1}}>{{pri.PriorityName}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Status</ion-label>
+          <ion-select [(ngModel)]="StatusId" placeholder="Select One">
+            <ion-select-option disabled>---Select---</ion-select-option>
+            <ion-select-option *ngFor="let sta of StatusList, let i = index" value={{i+1}}>{{sta.StatusName}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+    </div>
+
+
+    <div>
+      <ion-grid>
+        <ion-row class="center" style="display: block;">
+          <ion-text>
+            <b>Confirm save?</b>
+          </ion-text>
+        </ion-row>
+        <ion-row class="center">
+          <ion-col>
+            <ion-button color="danger" (click)="refuse()">
+              <ion-icon name="close-outline"></ion-icon>
+            </ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button color="success" (click)="accept()">
+              <ion-icon name="checkmark-outline"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </ion-card>
+
+  <ion-card style="width: 95% !important;" *ngIf="modalConfig.isEditTask">
+    <ion-label>
+      <div class="label"><b>{{modalConfig.EditTaskLabel}}</b></div>
+    </ion-label>
+
+    <div style="display: flex; flex-direction: column;" class="ion-padding">
+
+        <ion-item>
+          <ion-label position="floating">Task Name</ion-label>
+          <ion-input id="TaskName" [(ngModel)]="TaskName" type="text" placeholder="Insert Task Name">
+          </ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Description</ion-label>
+          <ion-input id="Description" [(ngModel)]="Description" type="text" placeholder="Insert Description">
+          </ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Create On</ion-label>
+          <ion-input id="CreateOn" [(ngModel)]="CreateOn" type="text"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Estimate</ion-label>
+          <ion-input id="Estimate" [(ngModel)]="Estimate" type="date"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Complete On</ion-label>
+          <ion-input id="CompleteOn" [(ngModel)]="CompleteOn" type="date"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Priority</ion-label>
+          <ion-select [(ngModel)]="PriorityId" placeholder="Select One">
+            <ion-select-option disabled>---Select---</ion-select-option>
+            <ion-select-option *ngFor="let pri of PriorityList, let i = index" [value]=sta.StatusId>{{pri.PriorityName}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+        
+        <ion-item>
+          <ion-label position="floating">Status</ion-label>
+          <ion-select [(ngModel)]="StatusId" placeholder="Select One">
+            <ion-select-option disabled>---Select---</ion-select-option>
+            <ion-select-option *ngFor="let sta of StatusList, let i = index" [value]=sta.StatusId>{{sta.StatusName}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+    </div>
+
+
+    <div>
+      <ion-grid>
+        <ion-row class="center" style="display: block;">
+          <ion-text>
+            <b>Confirm save?</b>
+          </ion-text>
+        </ion-row>
+        <ion-row class="center">
+          <ion-col>
+            <ion-button color="danger" (click)="refuse()">
+              <ion-icon name="close-outline"></ion-icon>
+            </ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button color="success" (click)="accept()">
+              <ion-icon name="checkmark-outline"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </ion-card>
+
 </ion-content>

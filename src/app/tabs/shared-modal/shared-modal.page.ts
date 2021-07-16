@@ -34,6 +34,17 @@ export class SharedModalPage implements OnInit {
   @Input() PhotoFileName: any;
   @Input() PhotoFilePath: any;
 
+  //Get data pass in for Task ( when Edit )
+  @Input() StatusList: any;
+  @Input() PriorityList: any;
+  @Input() TaskId: any;
+  @Input() TaskName: any;
+  @Input() Description: any;
+  @Input() CreateOn: any;
+  @Input() Estimate: any;
+  @Input() CompleteOn: any;
+  @Input() StatusId: any;
+  @Input() PriorityId: any;
 
   modalConfig = null;
   _modalConfig = {
@@ -54,6 +65,12 @@ export class SharedModalPage implements OnInit {
 
     isEditEmp: false,
     EditEmpLabel: 'Edit Employee',
+
+    isAddTask: false,
+    AddTaskLabel: 'Add Task',
+
+    isEditTask: false,
+    EditTaskLabel: 'Edit Task',
   }
 
   buttonValue;
@@ -90,10 +107,13 @@ export class SharedModalPage implements OnInit {
     })
   }
 
+
+  //fix this! Seperate out!
   dismiss() {
     this.modalController.dismiss({
       modalValue: this.buttonValue,
       modalType: this.modalType,
+
       DepartmentId: this.DepartmentId,
       DepartmentName: this.DepartmentName,
 
@@ -101,7 +121,16 @@ export class SharedModalPage implements OnInit {
       EmployeeName: this.EmployeeName,
       Department: this.Department,
       DateOfJoining: this.DateOfJoining,
-      PhotoFileName: this.PhotoFileName
+      PhotoFileName: this.PhotoFileName,
+
+      TaskId: this.TaskId,
+      TaskName: this.TaskName,
+      Description: this.Description,
+      CreateOn: this.CreateOn,
+      Estimate: this.Estimate,
+      CompleteOn: this.CompleteOn,
+      StatusId: this.StatusId,
+      PriorityId: this.PriorityId,
     });
   }
 }
