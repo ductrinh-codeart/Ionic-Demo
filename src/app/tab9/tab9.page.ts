@@ -27,6 +27,6 @@ export class Tab9Page implements OnInit {
   ngOnInit() { }
 
   alert(){
-    alert('To use this page functions, first to open WebAPI with Visual Studio')
+    alert('Open http://localhost/WebAPIDemo for API Server working!')
   }
 }

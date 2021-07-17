@@ -35,7 +35,7 @@ export class Tab10Page implements OnInit {
 
   ngOnInit() { }
 
-  alert() {
-    alert('To use this page functions, first to open Correct WebAPI with Visual Studio')
+  alert(){
+    alert('Open http://localhost/TaskManager for API Server working!')
   }
 }
