@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class Tab10ServiceService {
   readonly APIUrl = "http://localhost/TaskManager/api";
+  // readonly APIUrl = "http://localhost:63310/api";
 
   constructor(private http: HttpClient) { }
 
