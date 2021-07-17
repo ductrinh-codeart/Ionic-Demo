@@ -48,7 +48,7 @@ export class SharedModalPage implements OnInit {
 
   modalConfig = null;
   _modalConfig = {
-    isScanner : false,
+    isScanner: false,
     scannerPageLabel: 'Scanner Demo',
 
     isFormInput: false,
@@ -95,13 +95,13 @@ export class SharedModalPage implements OnInit {
     this.dismiss();
   }
 
-  uploadPhoto(event){
+  uploadPhoto(event) {
     debugger
     var file = event.target.files[0];
-    const formData:FormData = new FormData();
-    formData.append('uploadedFile',file,file.name);
+    const formData: FormData = new FormData();
+    formData.append('uploadedFile', file, file.name);
 
-    this.service.UploadPhoto(formData).subscribe((data:any)=>{
+    this.service.UploadPhoto(formData).subscribe((data: any) => {
       this.PhotoFileName = data.toString();
       this.PhotoFilePath = (this.service.PhotoUrl + this.PhotoFileName).toString();
     })
@@ -110,27 +110,43 @@ export class SharedModalPage implements OnInit {
 
   //fix this! Seperate out!
   dismiss() {
-    this.modalController.dismiss({
-      modalValue: this.buttonValue,
-      modalType: this.modalType,
 
-      DepartmentId: this.DepartmentId,
-      DepartmentName: this.DepartmentName,
+    if (this._modalConfig.isAddDep == true || this._modalConfig.isEditDep == true) {
+      this.modalController.dismiss({
+        modalValue:       this.buttonValue,
+        modalType:        this.modalType,
 
-      EmployeeId: this.EmployeeId,
-      EmployeeName: this.EmployeeName,
-      Department: this.Department,
-      DateOfJoining: this.DateOfJoining,
-      PhotoFileName: this.PhotoFileName,
+        DepartmentId:     this.DepartmentId,
+        DepartmentName:   this.DepartmentName,
+      });
+    }
 
-      TaskId: this.TaskId,
-      TaskName: this.TaskName,
-      Description: this.Description,
-      CreateOn: this.CreateOn,
-      Estimate: this.Estimate,
-      CompleteOn: this.CompleteOn,
-      StatusId: this.StatusId,
-      PriorityId: this.PriorityId,
-    });
+    else if (this._modalConfig.isAddEmp == true || this._modalConfig.isEditEmp == true) {
+      this.modalController.dismiss({
+        modalValue:       this.buttonValue,
+        modalType:        this.modalType,
+
+        EmployeeId:       this.EmployeeId,
+        EmployeeName:     this.EmployeeName,
+        Department:       this.Department,
+        DateOfJoining:    this.DateOfJoining,
+        PhotoFileName:    this.PhotoFileName,
+      });
+    }
+    else {
+      this.modalController.dismiss({
+        modalValue:       this.buttonValue,
+        modalType:        this.modalType,
+
+        TaskId:           this.TaskId,
+        TaskName:         this.TaskName,
+        Description:      this.Description,
+        CreateOn:         this.CreateOn,
+        Estimate:         this.Estimate,
+        CompleteOn:       this.CompleteOn,
+        StatusId:         this.StatusId,
+        PriorityId:       this.PriorityId,
+      });
+    }
   }
 }

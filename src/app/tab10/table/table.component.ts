@@ -186,7 +186,7 @@ export class TableComponent implements OnInit {
     // seperate this between add new or edit existing.
     if (this.modalType == 'add') {
       var val = {
-        TaskId:      this.TaskId,
+        TaskId:       this.TaskId,
         TaskName:     this.TaskName,
         Description:  this.Description,
         CreateOn:     this.CreateOn,
@@ -202,7 +202,7 @@ export class TableComponent implements OnInit {
     }
     else if (this.modalType == 'edit') {
       var val = {
-        TaskId:      this.TaskId,
+        TaskId:       this.TaskId,
         TaskName:     this.TaskName,
         Description:  this.Description,
         CreateOn:     this.CreateOn,
