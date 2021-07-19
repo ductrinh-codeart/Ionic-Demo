@@ -13,6 +13,12 @@ export class PriorityComponent implements OnInit {
 
   modalType;
   modalValue;
+
+  //Toggle Done only
+  DoneListView = false;
+  TaskListView = true;
+
+  
   //Task
   TaskId: number = 0;
   TaskName;
@@ -22,8 +28,11 @@ export class PriorityComponent implements OnInit {
   CompleteOn;
   StatusId;
   PriorityId;
-  TaskList: any = [];
-  StatusList: any = [];
+
+  //List 
+  DoneList:     any = [];
+  TaskList:     any = [];
+  StatusList:   any = [];
   PriorityList: any = [];
 
   //PriorityList
@@ -32,8 +41,14 @@ export class PriorityComponent implements OnInit {
   Priority3: any = [];
   Priority4: any = [];
 
+  //PriorityListDone
+  Priority1Done: any = [];
+  Priority2Done: any = [];
+  Priority3Done: any = [];
+  Priority4Done: any = [];
+
   //filter
-  TaskIdFilter: string = "";
+  TaskIdFilter:   string = "";
   TaskNameFilter: string = "";
   EstimateFilter: string = "";
   StatusIdFilter: string = "";
@@ -66,27 +81,59 @@ export class PriorityComponent implements OnInit {
 
   refreshTaskList() {
     this.service.getTaskList().subscribe(data => {
-      this.TaskList = data;
-      this.TaskListWithoutFilter = data;
 
       //Reset, Then Re-add to lists.
-      this.Priority1 = [];
-      this.Priority2 = [];
-      this.Priority3 = [];
-      this.Priority4 = [];
+      this.DoneList       = [];
+      this.TaskList       = [];
+      this.Priority1      = [];
+      this.Priority2      = [];
+      this.Priority3      = [];
+      this.Priority4      = [];
+      this.Priority1Done  = [];
+      this.Priority2Done  = [];
+      this.Priority3Done  = [];
+      this.Priority4Done  = [];
 
-      for (let i = 0; i < data.length; i++) {
-        if (data[i].PriorityId == 1) {
-          this.Priority1.push(data[i]);
-        }
-        else if (data[i].PriorityId == 2) {
-          this.Priority2.push(data[i]);
-        }
-        else if (data[i].PriorityId == 3) {
-          this.Priority3.push(data[i]);
+      // First Sort out Done Task!
+      for (let i = 0; i < data.length; i++) { 
+        if (data[i].StatusId == 3) {
+          this.DoneList.push(data[i]);
         }
         else {
-          this.Priority4.push(data[i]);
+          this.TaskList.push(data[i]);
+          this.TaskListWithoutFilter.push(data[i]);
+        }
+      }
+
+      // then fill un-done task to list
+      for (let i = 0; i < this.TaskList.length; i++) {
+        if (this.TaskList[i].PriorityId == 1) {
+          this.Priority1.push(this.TaskList[i]);
+        }
+        else if (this.TaskList[i].PriorityId == 2) {
+          this.Priority2.push(this.TaskList[i]);
+        }
+        else if (this.TaskList[i].PriorityId == 3) {
+          this.Priority3.push(this.TaskList[i]);
+        }
+        else {
+          this.Priority4.push(this.TaskList[i]);
+        }
+      }
+
+      // Also fill for done task to list
+      for (let i = 0; i < this.DoneList.length; i++) {
+        if (this.DoneList[i].PriorityId == 1) {
+          this.Priority1Done.push(this.DoneList[i]);
+        }
+        else if (this.DoneList[i].PriorityId == 2) {
+          this.Priority2Done.push(this.DoneList[i]);
+        }
+        else if (this.DoneList[i].PriorityId == 3) {
+          this.Priority3Done.push(this.DoneList[i]);
+        }
+        else {
+          this.Priority4Done.push(this.DoneList[i]);
         }
       }
     })
@@ -133,7 +180,14 @@ export class PriorityComponent implements OnInit {
 
 
   async presentEditModal(obj) {
-    let item = this.TaskList.find(o => o.TaskId === obj);
+
+    if (this.TaskListView == true) {
+      var item = this.TaskList.find(o => o.TaskId === obj);
+    }
+    else {
+      var item = this.DoneList.find(o => o.TaskId === obj);
+    }
+
     const modal = await this.modalController.create({
       component: SharedModalPage,
       cssClass: 'modal-class',
@@ -207,7 +261,7 @@ export class PriorityComponent implements OnInit {
     // seperate this between add new or edit existing.
     if (this.modalType == 'add') {
       var val = {
-        TaskId:      this.TaskId,
+        TaskId:       this.TaskId,
         TaskName:     this.TaskName,
         Description:  this.Description,
         CreateOn:     this.CreateOn,
@@ -223,7 +277,7 @@ export class PriorityComponent implements OnInit {
     }
     else if (this.modalType == 'edit') {
       var val = {
-        TaskId:      this.TaskId,
+        TaskId:       this.TaskId,
         TaskName:     this.TaskName,
         Description:  this.Description,
         CreateOn:     this.CreateOn,

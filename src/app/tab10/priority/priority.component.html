@@ -1,12 +1,132 @@
-<div class="view-header">
+<div class="view-header" title="Total of Tasks: {{TaskList.length + DoneList.length}} tasks
+Working: {{TaskList.length}} tasks | Done: {{DoneList.length}} tasks">
   Priority View
-
-  <ion-button class="add-task" (click)="presentModal()">
-    Add Task
-  </ion-button>
 </div>
 
-<ion-grid class="view-content">
+<ion-grid *ngIf="DoneListView" class="view-content">
+  <ion-row class="row-css">
+
+    <ion-col size='12' size-md='3'>
+
+      <ion-card>
+        <ion-card-header class="priority1">
+          <div>Important & Urgent</div>
+        </ion-card-header>
+
+        <ion-card-content>
+          <ion-grid *ngFor="let item of Priority1Done, let i = index">
+            <ion-row (click)="presentEditModal(item.TaskId)">
+              <!-- Name -->
+              <ion-col class="Col-Name" title="TaskName: {{item.TaskName}}, Description: {{item.Description}}, Create On: {{item.CreateOn}}, Estimate: {{item.Estimate}}" 
+                              size='10' size-lg='11'>
+                <div>{{item.TaskName}}</div>
+              </ion-col>
+              <!-- Status -->
+              <ion-col size='2' size-lg='1' class="status1" *ngIf="item.StatusId == 1">
+              </ion-col>
+              <ion-col size='2' size-lg='1' class="status2" *ngIf="item.StatusId == 2">
+              </ion-col>
+              <ion-col title="Complete On: {{item.CompleteOn}}" size='2' size-lg='1' class="status3" *ngIf="item.StatusId == 3">
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+
+    </ion-col>
+
+    <ion-col size='12' size-md='3'>
+
+      <ion-card>
+        <ion-card-header class="priority2">
+          <div>Important, Not Urgent</div>
+        </ion-card-header>
+
+        <ion-card-content>
+          <ion-grid *ngFor="let item of Priority2Done">
+            <ion-row (click)="presentEditModal(item.TaskId)">
+              <!-- Name -->
+              <ion-col class="Col-Name" title="TaskName: {{item.TaskName}}, Description: {{item.Description}}, Create On: {{item.CreateOn}}, Estimate: {{item.Estimate}}" 
+                              size='10' size-lg='11'>
+                <div>{{item.TaskName}}</div>
+              </ion-col>
+              <!-- Status -->
+              <ion-col size='2' size-lg='1' class="status1" *ngIf="item.StatusId == 1">
+              </ion-col>
+              <ion-col size='2' size-lg='1' class="status2" *ngIf="item.StatusId == 2">
+              </ion-col>
+              <ion-col title="Complete On: {{item.CompleteOn}}" size='2' size-lg='1' class="status3" *ngIf="item.StatusId == 3">
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+
+    </ion-col>
+
+    <ion-col size='12' size-md='3'>
+
+      <ion-card>
+        <ion-card-header class="priority3">
+          <div>Not Important, Urgent</div>
+        </ion-card-header>
+
+        <ion-card-content>
+          <ion-grid *ngFor="let item of Priority3Done">
+            <ion-row (click)="presentEditModal(item.TaskId)">
+              <!-- Name -->
+              <ion-col class="Col-Name" title="TaskName: {{item.TaskName}}, Description: {{item.Description}}, Create On: {{item.CreateOn}}, Estimate: {{item.Estimate}}" 
+                              size='10' size-lg='11'>
+                <div>{{item.TaskName}}</div>
+              </ion-col>
+              <!-- Status -->
+              <ion-col size='2' size-lg='1' class="status1" *ngIf="item.StatusId == 1">
+              </ion-col>
+              <ion-col size='2' size-lg='1' class="status2" *ngIf="item.StatusId == 2">
+              </ion-col>
+              <ion-col title="Complete On: {{item.CompleteOn}}" size='2' size-lg='1' class="status3" *ngIf="item.StatusId == 3">
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+
+    </ion-col>
+
+    <ion-col size='12' size-md='3'>
+
+      <ion-card>
+        <ion-card-header class="priority4">
+          <div>Not Important & Urgent</div>
+        </ion-card-header>
+
+        <ion-card-content>
+          <ion-grid *ngFor="let item of Priority4Done">
+            <ion-row (click)="presentEditModal(item.TaskId)">
+              <!-- Name -->
+              <ion-col class="Col-Name" title="TaskName: {{item.TaskName}}, Description: {{item.Description}}, Create On: {{item.CreateOn}}, Estimate: {{item.Estimate}}" 
+                              size='10' size-lg='11'>
+                <div>{{item.TaskName}}</div>
+              </ion-col>
+              <!-- Status -->
+              <ion-col size='2' size-lg='1' class="status1" *ngIf="item.StatusId == 1">
+              </ion-col>
+              <ion-col size='2' size-lg='1' class="status2" *ngIf="item.StatusId == 2">
+              </ion-col>
+              <ion-col title="Complete On: {{item.CompleteOn}}" size='2' size-lg='1' class="status3" *ngIf="item.StatusId == 3">
+              </ion-col>
+
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+
+    </ion-col>
+
+  </ion-row>
+</ion-grid>
+
+<ion-grid *ngIf="TaskListView" class="view-content">
   <ion-row class="row-css">
 
     <ion-col size='12' size-md='3'>

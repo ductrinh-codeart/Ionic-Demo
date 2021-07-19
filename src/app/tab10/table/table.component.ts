@@ -13,6 +13,11 @@ export class TableComponent implements OnInit {
 
   modalType;
   modalValue;
+
+  //Toggle Done only
+  DoneListView = false;
+  TaskListView = true;
+
   //Task
   TaskId: number = 0;
   TaskName;
@@ -22,15 +27,20 @@ export class TableComponent implements OnInit {
   CompleteOn;
   StatusId;
   PriorityId;
-  TaskList: any = [];
-  StatusList: any = [];
+
+  //List 
+  DoneList:     any = [];
+  TaskList:     any = [];
+  StatusList:   any = [];
   PriorityList: any = [];
+
   //filter
-  TaskIdFilter: string = "";
+  TaskIdFilter:   string = "";
   TaskNameFilter: string = "";
   EstimateFilter: string = "";
   StatusIdFilter: string = "";
   PriorityFilter: string = "";
+  DoneListWithoutFilter: any = [];
   TaskListWithoutFilter: any = [];
 
   constructor(
@@ -43,35 +53,58 @@ export class TableComponent implements OnInit {
     this.loadStatusList();
   }
 
-  loadStatusList(){
-    this.service.getAllStatusName().subscribe((data:any)=>{
-      this.StatusList=data;
+  loadStatusList() {
+    this.service.getAllStatusName().subscribe((data: any) => {
+      this.StatusList = data;
     });
     this.loadPrioriyList();
   }
 
-  loadPrioriyList(){
-    this.service.getAllPriorityName().subscribe((data:any)=>{
-      this.PriorityList=data;
+  loadPrioriyList() {
+    this.service.getAllPriorityName().subscribe((data: any) => {
+      this.PriorityList = data;
     });
     this.refreshTaskList();
   }
 
   refreshTaskList() {
     this.service.getTaskList().subscribe(data => {
-      this.TaskList = data;
-      this.TaskListWithoutFilter = data;
+
+      this.DoneList = [];
+      this.TaskList = [];
+
+      for (let i = 0; i < data.length; i++) {
+        if (data[i].StatusId == 3) {
+          this.DoneList.push(data[i]);
+          this.DoneListWithoutFilter.push(data[i]);
+        }
+        else {
+          this.TaskList.push(data[i]);
+          this.TaskListWithoutFilter.push(data[i]);
+        }
+      }
     })
   }
 
-  FilterFn(){
-    var TaskNameFilter = this.TaskNameFilter;
+  FilterFn() {
+    if (this.TaskListView == true) {
+      var TaskNameFilter = this.TaskNameFilter;
 
-    this.TaskList = this.TaskListWithoutFilter.filter(function(el){
-      return el.TaskName.toString().toLowerCase().includes(
-        TaskNameFilter.toString().trim().toLowerCase()
-      );
-    });
+      this.TaskList = this.TaskListWithoutFilter.filter(function (el) {
+        return el.TaskName.toString().toLowerCase().includes(
+          TaskNameFilter.toString().trim().toLowerCase()
+        );
+      });
+    }
+    else {
+      var TaskNameFilter = this.TaskNameFilter;
+
+      this.DoneList = this.DoneListWithoutFilter.filter(function (el) {
+        return el.TaskName.toString().toLowerCase().includes(
+          TaskNameFilter.toString().trim().toLowerCase()
+        );
+      });
+    }
   }
 
   async presentModal() {
@@ -113,7 +146,16 @@ export class TableComponent implements OnInit {
     return await modal.present();
   }
 
-  async presentEditModal(item) {
+  async presentEditModal(obj) {
+    debugger
+
+    if (this.TaskListView == true) {
+      var item = this.TaskList.find(o => o.TaskId === obj.TaskId);
+    }
+    else {
+      var item = this.DoneList.find(o => o.TaskId === obj.TaskId);
+    }
+
     const modal = await this.modalController.create({
       component: SharedModalPage,
       cssClass: 'modal-class',
@@ -161,7 +203,7 @@ export class TableComponent implements OnInit {
     });
     return await modal.present();
   }
-  
+
   refuse() {
     if (this.modalType == 'add') {
       this.toast.ToastInfo = {
@@ -182,7 +224,7 @@ export class TableComponent implements OnInit {
   }
 
   accept() {
-    
+
     // seperate this between add new or edit existing.
     if (this.modalType == 'add') {
       var val = {
@@ -218,7 +260,7 @@ export class TableComponent implements OnInit {
     }
   }
 
-  AddEditComplete(){
+  AddEditComplete() {
     if (this.modalType == 'add') {
       this.toast.ToastInfo = {
         header: 'Task Manager:',

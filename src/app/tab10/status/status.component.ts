@@ -13,6 +13,7 @@ export class StatusComponent implements OnInit {
 
   modalType;
   modalValue;
+
   //Task
   TaskId: number = 0;
   TaskName;
@@ -22,17 +23,19 @@ export class StatusComponent implements OnInit {
   CompleteOn;
   StatusId;
   PriorityId;
-  TaskList: any = [];
-  StatusList: any = [];
+
+  //List
+  TaskList:     any = [];
+  StatusList:   any = [];
   PriorityList: any = [];
 
   //StatusList
-  Pending: any = [];
-  Working: any = [];
-  Done: any = [];
+  Pending:  any = [];
+  Working:  any = [];
+  Done:     any = [];
 
   //filter
-  TaskIdFilter: string = "";
+  TaskIdFilter:   string = "";
   TaskNameFilter: string = "";
   EstimateFilter: string = "";
   StatusIdFilter: string = "";
@@ -69,9 +72,9 @@ export class StatusComponent implements OnInit {
       this.TaskListWithoutFilter = data;
 
       //Reset, Then Re-add to lists.
-      this.Pending = [];
-      this.Working = [];
-      this.Done = [];
+      this.Pending  = [];
+      this.Working  = [];
+      this.Done     = [];
 
       for (let i = 0; i < data.length; i++) {
         if (data[i].StatusId == 1) {
@@ -202,7 +205,7 @@ export class StatusComponent implements OnInit {
     // seperate this between add new or edit existing.
     if (this.modalType == 'add') {
       var val = {
-        TaskId:      this.TaskId,
+        TaskId:       this.TaskId,
         TaskName:     this.TaskName,
         Description:  this.Description,
         CreateOn:     this.CreateOn,
@@ -218,7 +221,7 @@ export class StatusComponent implements OnInit {
     }
     else if (this.modalType == 'edit') {
       var val = {
-        TaskId:      this.TaskId,
+        TaskId:       this.TaskId,
         TaskName:     this.TaskName,
         Description:  this.Description,
         CreateOn:     this.CreateOn,

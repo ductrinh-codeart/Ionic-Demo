@@ -16,8 +16,10 @@
   </ion-header>
 
 
+
+
   <ion-grid style="overflow-y: hidden;">
-    <ion-row class="float-right">
+    <!-- <ion-row class="float-right">
       <ion-col size="1">
         <ion-button (click)="ShowTable()">Table</ion-button>
       </ion-col>
@@ -27,10 +29,11 @@
       <ion-col size="1">
         <ion-button (click)="ShowStatus()">Status</ion-button>
       </ion-col>
-    </ion-row>
+    </ion-row> -->
     <ion-row class="row-height">
       <ion-col>
       <ion-card class="ion-padding" >
+        
         <app-table *ngIf="table"></app-table>
         <app-priority *ngIf="priority"></app-priority>
         <app-status *ngIf="status"></app-status>
@@ -38,4 +41,42 @@
       </ion-col>
     </ion-row>
   </ion-grid>
+
+
+  <ion-fab vertical="top" horizontal="end" edge slot="fixed">
+    <ion-fab-button color='primary'>
+      <ion-icon name="bookmarks-outline"></ion-icon>
+    </ion-fab-button>
+
+    <ion-fab-list side="start">
+      <ion-fab-button color='warning' (click)="ShowStatus()">
+        <ion-icon name="albums-outline" title="Status"> Status </ion-icon>
+      </ion-fab-button>
+      <ion-fab-button color='warning' (click)="ShowPriority()">
+        <ion-icon name="albums-outline" title="Priority"> Priority </ion-icon>
+      </ion-fab-button>
+      <ion-fab-button color='warning' (click)="ShowTable()">
+        <ion-icon name="tablet-landscape-outline" title="Table"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+
+    <ion-fab-list side="bottom">
+      <ion-fab-button *ngIf="table" color='success' (click)="toggleDone()">
+        <ion-icon name="toggle-outline"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button *ngIf="table" color='primary' (click)="toggleAdd()">
+        <ion-icon name="add-outline"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button *ngIf="priority" color='success' (click)="toggleDone()">
+        <ion-icon name="toggle-outline"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button *ngIf="priority" color='primary' (click)="toggleAdd()">
+        <ion-icon name="add-outline"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button *ngIf="status" color='primary' (click)="toggleAdd()">
+        <ion-icon name="add-outline"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+
 </ion-content>

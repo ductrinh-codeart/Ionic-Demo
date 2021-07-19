@@ -5,10 +5,15 @@
 
 ion-grid {
     height: 100%;
+    background: aliceblue;
 }
 
 ion-row.row-height { 
     height: 95% !important;
+}
+
+ion-col {
+    margin-top: 35px;
 }
 
 ion-card {
@@ -16,5 +21,4 @@ ion-card {
     overflow-y: auto;
     max-height: calc(100vh - 20%);
     min-height: calc(100vh - 30%);
-
 }

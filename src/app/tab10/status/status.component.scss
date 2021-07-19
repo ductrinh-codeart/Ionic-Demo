@@ -5,6 +5,7 @@
     text-align: center;
     vertical-align: middle;
     line-height: 4.5rem;
+    box-shadow: 3px 3px 10px -3px #888888;
 }
 
 .add-task {
@@ -17,7 +18,11 @@
     justify-content: center;
 }
 
-ion-card-header{
+ion-card { 
+    box-shadow: 5px 5px 20px -3px #888888;
+}
+
+ion-card-header {
     padding: 0px;
     height: 50px;
     text-align: center;
