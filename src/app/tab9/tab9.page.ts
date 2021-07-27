@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class Tab9Page implements OnInit {
 
   employee: boolean = false;
-  department: boolean = false;
+  department: boolean = true;
 
   constructor() {
     this.alert();

@@ -1,0 +1,41 @@
+ion-slides {
+    height:50%;
+}
+
+.upper-part {
+    height: 50%;
+}
+
+ion-card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+ion-card-header {
+    padding: 0px;
+    width: 350px;
+    min-height: 170px;
+    max-height: 170px;
+    ion-thumbnail {
+        height: 100%;
+        width: 100%;
+        img {
+            object-fit: cover;
+            width: 350px;
+            height: 170px;
+        }
+    }
+}
+
+ion-card-content {
+    padding: 8px 16px 16px;
+    text-align: left;
+    max-width: 350px;
+    .card-title {
+        font-weight: bold;
+    }
+    .card-description {
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+}

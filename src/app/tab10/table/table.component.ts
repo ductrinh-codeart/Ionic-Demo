@@ -199,6 +199,7 @@ export class TableComponent implements OnInit {
       }
       else {
         this.accept();
+        debugger
       }
     });
     return await modal.present();

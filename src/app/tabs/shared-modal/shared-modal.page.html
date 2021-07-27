@@ -347,7 +347,7 @@
 
         <ion-item>
           <ion-label position="floating">Priority</ion-label>
-          <ion-select [(ngModel)]="PriorityId" placeholder="Select One">
+          <ion-select interface="popover" [(ngModel)]="PriorityId" placeholder="Select One">
             <ion-select-option disabled>---Select---</ion-select-option>
             <ion-select-option *ngFor="let pri of PriorityList, let i = index" value={{i+1}}>{{pri.PriorityName}}</ion-select-option>
           </ion-select>
@@ -355,7 +355,7 @@
 
         <ion-item>
           <ion-label position="floating">Status</ion-label>
-          <ion-select [(ngModel)]="StatusId" placeholder="Select One">
+          <ion-select interface="popover" [(ngModel)]="StatusId" placeholder="Select One">
             <ion-select-option disabled>---Select---</ion-select-option>
             <ion-select-option *ngFor="let sta of StatusList, let i = index" value={{i+1}}>{{sta.StatusName}}</ion-select-option>
           </ion-select>
@@ -423,7 +423,7 @@
 
         <ion-item>
           <ion-label position="floating">Priority</ion-label>
-          <ion-select [(ngModel)]="PriorityList"  placeholder="Select One">
+          <ion-select interface="popover" [(ngModel)]="PriorityList"  placeholder="Select One">
             <ion-select-option disabled>---Select---</ion-select-option>
             <ion-select-option *ngFor="let pri of PriorityList, let i = index" value="{{pri.PriorityId}}">{{pri.PriorityName}}</ion-select-option>
           </ion-select>
@@ -431,7 +431,7 @@
         
         <ion-item>
           <ion-label position="floating">Status</ion-label>
-          <ion-select [(ngModel)]="StatusId" placeholder="Select One">
+          <ion-select interface="popover" [(ngModel)]="StatusId" placeholder="Select One">
             <ion-select-option disabled>---Select---</ion-select-option>
             <ion-select-option *ngFor="let sta of StatusList, let i = index" value="{{sta.StatusId}}">{{sta.StatusName}}</ion-select-option>
           </ion-select>
@@ -462,5 +462,98 @@
       </ion-grid>
     </div>
   </ion-card>
+
+   <!-- Tab 11 -->
+   <ion-card style="width: 95% !important;" *ngIf="modalConfig.isViewRecipe">
+    <ion-label>
+      <div class="label"><b>{{modalConfig.ViewRecipeLabel}}</b></div>
+    </ion-label>
+
+    <div style="display: flex; flex-direction: column;" class="ion-padding">
+
+      <ion-thumbnail>
+        <img *ngIf="ImageNamePath" src={{ImageNamePath}} />
+      </ion-thumbnail>
+
+        <ion-item>
+          <ion-label position="stacked">Title</ion-label>
+          <ion-input readonly id="Title" type="text">
+            {{Title}}
+          </ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Description</ion-label>
+          <ion-input readonly id="Description" type="text">
+            {{Description}}
+          </ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Cuisine</ion-label>
+          <ion-input readonly id="CuisineName" type="text">
+            {{CuisineName}}
+          </ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Prepare Time</ion-label>
+          <ion-input readonly id="PrepTime" type="text">
+            {{PrepTime}} mins
+          </ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Cook Time</ion-label>
+          <ion-input readonly id="CookTime" type="text">
+            {{CookTime}} mins
+          </ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Level</ion-label>
+          <ion-input readonly id="LevelName" type="text">
+            {{LevelName}}
+          </ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">Rating</ion-label>
+          <ion-input readonly id="Rating" type="text">
+            {{Rating}} stars
+          </ion-input>
+        </ion-item>
+
+          <ion-item>
+            <ion-label position="stacked">Ingredients</ion-label>
+            <ion-input readonly id="Rating" type="text" *ngFor="let item of RecipeIngredientList">
+              {{item}}
+            </ion-input>
+          </ion-item>
+
+    </div>
+
+    <div>
+      <ion-grid>
+        <ion-row class="center" style="display: block;">
+          <ion-text>
+            <b>Start cooking?</b>
+          </ion-text>
+        </ion-row>
+        <ion-row class="center">
+          <ion-col>
+            <ion-button color="danger" (click)="refuse()">
+              <ion-icon name="close-outline"></ion-icon>
+            </ion-button>
+          </ion-col>
+          <ion-col>
+            <ion-button color="success" (click)="accept()">
+              <ion-icon name="checkmark-outline"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+   </ion-card>
 
 </ion-content>

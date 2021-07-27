@@ -1,0 +1,53 @@
+<ion-header [translucent]="true" (click)="openMenu()">
+  <ion-toolbar>
+    <ion-title title='Task Manager with API'>
+      Recipes
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content [fullscreen]="true" id='QRpage'>
+  <ion-header collapse="condense" (click)="openMenu()">
+    <ion-toolbar>
+      <ion-title size="large">Recipes</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-menu side="end" type="overlay" menuId="custom" contentId="main">
+    <ion-header>
+      <ion-toolbar color="danger">
+        <ion-title>Recipes App</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list>
+        <ion-item (click)="toggleHome()">Home</ion-item>
+        <ion-item (click)="toggleRecipes()">Recipes</ion-item>
+        <ion-item (click)="toggleIngredients()">Ingredients</ion-item>
+        <ion-item (click)="toggleCuisines()">Cuisines</ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+
+  <ion-router-outlet id="main">
+
+    <ng-container *ngIf="Home">
+      <app-home></app-home>
+    </ng-container>
+
+    <ng-container *ngIf="Recipes">
+      <app-recipes></app-recipes>
+    </ng-container>
+
+    <ng-container *ngIf="Ingredients">
+      <app-ingredients></app-ingredients>
+    </ng-container>
+
+    <ng-container *ngIf="Cuisines">
+      <app-cuisines></app-cuisines>
+    </ng-container>
+
+  </ion-router-outlet>
+
+</ion-content>

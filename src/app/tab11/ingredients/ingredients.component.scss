@@ -1,0 +1,36 @@
+ion-grid {
+    margin: 0px;
+    padding: 0px;
+}
+
+ion-thumbnail {
+    height: 150px;
+    width: 150px;
+}
+
+.item-content {
+    overflow: hidden;
+}
+
+.card-description {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.scroll-list {
+    overflow-y: scroll;
+    height: 80vh;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.scroll-list::-webkit-scrollbar {
+    display: none;
+}
+
+@media screen and (max-width: 768px) {
+    .scroll-list {
+        height: 77vh;
+    }
+}

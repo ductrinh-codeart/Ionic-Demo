@@ -1,0 +1,63 @@
+<!-- Half-upper -->
+<ion-slides [options]="{ slidesPerView:1, speed: 1000, autoplay: {delay: 4000} }" #slider
+  (ionSlidesDidLoad)="slidesDidLoad(slider)">
+  <ion-slide *ngFor="let item of RecipesList, let i = index">
+    <ion-card (click)="presentViewModal(item)">
+      <ion-card-header>
+        <ion-thumbnail>
+          <img *ngIf="ImageNamePath" src={{ImageNamePath[i]}} />
+        </ion-thumbnail>
+      </ion-card-header>
+
+      <ion-card-content class="item-content">
+        <div class="card-subtitle"><small >{{CuisineNameList[i]}}</small></div>
+        <div class="card-title" *ngIf="item.rTitle">{{item.rTitle}}</div>
+        <div class="card-description"><small *ngIf="item.rDescription">{{item.rDescription}}</small></div>
+        <div class="card-readyin"><small *ngIf="item.rReadyIn">Ready in: {{item.rReadyIn}} mins</small></div>
+        <div class="card-level"><small >Level: {{LevelNameList[i]}}</small></div>
+        <div class="card-rating">
+          <small *ngIf="item.rRating == 1">Rating: 
+            <ion-icon name="star"></ion-icon>
+            <ion-icon name="star-outline"></ion-icon>
+            <ion-icon name="star-outline"></ion-icon>
+            <ion-icon name="star-outline"></ion-icon>
+            <ion-icon name="star-outline"></ion-icon>
+          </small>
+          <small *ngIf="item.rRating == 2">Rating: 
+            <ion-icon name="star"></ion-icon>
+            <ion-icon name="star"></ion-icon>
+            <ion-icon name="star-outline"></ion-icon>
+            <ion-icon name="star-outline"></ion-icon>
+            <ion-icon name="star-outline"></ion-icon>
+          </small>
+          <small *ngIf="item.rRating == 3">Rating: 
+            <ion-icon name="star"></ion-icon>
+            <ion-icon name="star"></ion-icon>
+            <ion-icon name="star"></ion-icon>
+            <ion-icon name="star-outline"></ion-icon>
+            <ion-icon name="star-outline"></ion-icon>
+          </small>
+          <small *ngIf="item.rRating == 4">Rating: 
+            <ion-icon name="star"></ion-icon>
+            <ion-icon name="star"></ion-icon>
+            <ion-icon name="star"></ion-icon>
+            <ion-icon name="star"></ion-icon>
+            <ion-icon name="star-outline"></ion-icon>
+          </small>
+          <small *ngIf="item.rRating == 5">Rating: 
+            <ion-icon name="star"></ion-icon>
+            <ion-icon name="star"></ion-icon>
+            <ion-icon name="star"></ion-icon>
+            <ion-icon name="star"></ion-icon>
+            <ion-icon name="star"></ion-icon>
+          </small>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </ion-slide>
+</ion-slides>
+
+<!-- Half-below -->
+<div class="upper-part">
+
+</div>

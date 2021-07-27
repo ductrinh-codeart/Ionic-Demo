@@ -1,0 +1,85 @@
+<ion-grid>
+  <ion-row style="display: flex;">
+    <ion-col size='10'>
+      <ion-item>
+      <ion-label position='floating'>
+        Search for Recipe!
+      </ion-label>
+      <ion-input>
+
+      </ion-input>
+    </ion-item>
+    </ion-col>
+    <ion-col size='2' style="display: flex;">
+      <ion-button style="margin: auto;">
+        <ion-icon name="add"></ion-icon>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+
+
+<div class="scroll-list">
+<ion-list>
+  <ion-item-sliding *ngFor="let item of RecipesList, let i = index">
+    <ion-item (click)="WriteLog(item)">
+      <ion-thumbnail slot="start">
+        <img src="https://i.insider.com/5d4203fb36e03c28a1020308?width=700" />
+      </ion-thumbnail>
+
+      <div class="item-content">
+        <div class="card-subtitle">
+          <small>{{CuisineNameList[i]}}</small>
+        </div>
+
+        <div class="card-title" *ngIf="item.rTitle">{{item.rTitle}}</div>
+        <div class="card-description"><small *ngIf="item.rDescription">{{item.rDescription}}</small></div>
+        <div class="card-readyin"><small *ngIf="item.rReadyIn">Ready in: {{item.rReadyIn}} mins</small></div>
+        <div class="card-level"><small>Level: {{LevelNameList[i]}}</small></div>
+        <div class="card-rating">
+          <small *ngIf="item.rRating == 1">Rating:
+            <ion-icon name="star"></ion-icon>
+            <ion-icon name="star-outline"></ion-icon>
+            <ion-icon name="star-outline"></ion-icon>
+            <ion-icon name="star-outline"></ion-icon>
+            <ion-icon name="star-outline"></ion-icon>
+          </small>
+          <small *ngIf="item.rRating == 2">Rating:
+            <ion-icon name="star"></ion-icon>
+            <ion-icon name="star"></ion-icon>
+            <ion-icon name="star-outline"></ion-icon>
+            <ion-icon name="star-outline"></ion-icon>
+            <ion-icon name="star-outline"></ion-icon>
+          </small>
+          <small *ngIf="item.rRating == 3">Rating:
+            <ion-icon name="star"></ion-icon>
+            <ion-icon name="star"></ion-icon>
+            <ion-icon name="star"></ion-icon>
+            <ion-icon name="star-outline"></ion-icon>
+            <ion-icon name="star-outline"></ion-icon>
+          </small>
+          <small *ngIf="item.rRating == 4">Rating:
+            <ion-icon name="star"></ion-icon>
+            <ion-icon name="star"></ion-icon>
+            <ion-icon name="star"></ion-icon>
+            <ion-icon name="star"></ion-icon>
+            <ion-icon name="star-outline"></ion-icon>
+          </small>
+          <small *ngIf="item.rRating == 5">Rating:
+            <ion-icon name="star"></ion-icon>
+            <ion-icon name="star"></ion-icon>
+            <ion-icon name="star"></ion-icon>
+            <ion-icon name="star"></ion-icon>
+            <ion-icon name="star"></ion-icon>
+          </small>
+        </div>
+      </div>
+    </ion-item>
+
+    <ion-item-options side="end">
+      <ion-item-option (click)="Edit(item)">Edit</ion-item-option>
+    </ion-item-options>
+  </ion-item-sliding>
+</ion-list>
+</div>

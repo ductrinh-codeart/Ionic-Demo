@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { RecipesService } from '../../tab11/recipes.service';
 import { SharedService } from '../../tab9/shared.service';
 
 @Component({
@@ -46,6 +47,23 @@ export class SharedModalPage implements OnInit {
   @Input() StatusId: any;
   @Input() PriorityId: any;
 
+  //Get data pass in for Recipe ( when View )
+  @Input() CuisineList: any;
+  @Input() CuisineNameList: any;
+  @Input() LevelList: any;
+  @Input() LevelNameList: any;
+  @Input() IngredientList: any;
+  @Input() RecipeID: any;
+  @Input() Title: any;
+  @Input() ImageName: any;
+  @Input() ImageNamePath: any;
+  @Input() CuisineID: any;
+  @Input() PrepTime: any;
+  @Input() CookTime: any;
+  @Input() ReadyIn: any;
+  @Input() LevelID: any;
+  @Input() Rating: any;
+
   modalConfig = null;
   _modalConfig = {
     isScanner: false,
@@ -71,18 +89,74 @@ export class SharedModalPage implements OnInit {
 
     isEditTask: false,
     EditTaskLabel: 'Edit Task',
+
+    isViewRecipe: false,
+    ViewRecipeLabel: 'View Recipe',
+
+    isEditRecipe: false,
+    EditRecipeLabel: 'Edit Recipe',
   }
 
   buttonValue;
+  CuisineName;
+  LevelName;
+  RecipeIngredientList: any = [];
 
   constructor(
     public modalController: ModalController,
-    private service: SharedService,
+    private tab9service: SharedService,
+    private tab11service: RecipesService,
   ) {
   }
 
   ngOnInit() {
     this.modalConfig = Object.assign(this._modalConfig, this.modalConfig);
+
+    if ( this._modalConfig.isViewRecipe == true || this._modalConfig.isEditRecipe == true ) {
+      let c = this.CuisineList.find(o => o.cCuisineID === this.CuisineID);
+      this.CuisineName = c.cCuisine;
+
+      let l = this.LevelList.find(o => o.lLevelID === this.LevelID);
+      this.LevelName = l.lLevelName;
+
+      this.loadRecipeIngreList();
+    }
+  }
+
+  loadRecipeIngreList() {
+    var val = this.RecipeID;
+
+    this.tab11service.GetRecipeIngredients(val).subscribe(res => {
+      for (let i = 0; i < res.length; i++) {
+
+      let ri = this.IngredientList.find(o => o.iIngredientID === res[i].riIngredientID);
+      this.RecipeIngredientList.push(ri.iIngredient)
+      };
+    });
+    debugger
+  }
+
+
+
+  uploadPhoto(event) {
+    debugger
+    var file = event.target.files[0];
+    const formData: FormData = new FormData();
+    formData.append('uploadedFile', file, file.name);
+
+    if ( this._modalConfig.isAddEmp == true || this._modalConfig.isEditEmp == true ) {
+    this.tab9service.UploadPhoto(formData).subscribe((data: any) => {
+      this.PhotoFileName = data.toString();
+      this.PhotoFilePath = (this.tab9service.PhotoUrl + this.PhotoFileName).toString();
+    });
+    }
+    else if ( this._modalConfig.isViewRecipe == true || this._modalConfig.isEditRecipe == true ) {
+      this.tab11service.UploadRecipeImage(formData).subscribe((data: any) => {
+        this.ImageName = data.toString();
+        this.ImageNamePath = (this.tab11service.RecipesUrl + this.ImageName).toString();
+        debugger
+      });
+    }
   }
 
   refuse() {
@@ -94,19 +168,6 @@ export class SharedModalPage implements OnInit {
     this.buttonValue = 'accept';
     this.dismiss();
   }
-
-  uploadPhoto(event) {
-    debugger
-    var file = event.target.files[0];
-    const formData: FormData = new FormData();
-    formData.append('uploadedFile', file, file.name);
-
-    this.service.UploadPhoto(formData).subscribe((data: any) => {
-      this.PhotoFileName = data.toString();
-      this.PhotoFilePath = (this.service.PhotoUrl + this.PhotoFileName).toString();
-    })
-  }
-
 
   //fix this! Seperate out!
   dismiss() {
@@ -133,7 +194,8 @@ export class SharedModalPage implements OnInit {
         PhotoFileName:    this.PhotoFileName,
       });
     }
-    else {
+
+    else if ((this._modalConfig.isAddTask == true || this._modalConfig.isEditTask == true)) {
       this.modalController.dismiss({
         modalValue:       this.buttonValue,
         modalType:        this.modalType,
@@ -146,6 +208,13 @@ export class SharedModalPage implements OnInit {
         CompleteOn:       this.CompleteOn,
         StatusId:         this.StatusId,
         PriorityId:       this.PriorityId,
+      });
+    }
+
+    else {
+      this.modalController.dismiss({
+        modalValue:       this.buttonValue,
+        modalType:        this.modalType,
       });
     }
   }
