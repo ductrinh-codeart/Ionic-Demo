@@ -1,0 +1,213 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title title='Task Manager with API'>
+      Import
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Import</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+
+  <div class="main-view">
+
+    <div class="row-full shadow full-screen">
+      <ion-toolbar color="primary">
+        <ion-segment scrollable="true" (ionChange)="segmentChanged($event)" [value]="segmentView"
+          style="justify-content:center">
+          <ion-segment-button value="s1">
+            <ion-label>File</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="s2">
+            <ion-label>Review</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="s3">
+            <ion-label>Result</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-toolbar>
+
+
+
+      <div>
+        <div *ngIf="segmentView == 's1'">
+          <div class="ion-padding segmentContent">
+            <ion-grid fixed>
+              <form [formGroup]="readGroup">
+                <ion-row>
+                  <ion-col size='12' size-md='10' size-lg='8'>
+                    <div>
+                      <ion-item>
+                        <ion-label position="stacked">Choose Model</ion-label>
+                        <ion-input formControlName="importModel" type="text"></ion-input>
+                      </ion-item>
+                    </div>
+                  </ion-col>
+                </ion-row>
+
+                <ion-row>
+                  <ion-col size='12' size-md='10' size-lg='8'>
+                    <div>
+                      <ion-item>
+                        <ion-label position="stacked">Choose file to read</ion-label>
+                        <ion-input id="file" type="file" (change)="handleFileInput($event.target.files)"></ion-input>
+                      </ion-item>
+                    </div>
+                  </ion-col>
+                </ion-row>
+
+                <ion-row>
+                  <ion-col size='12' size-md='10' size-lg='8'>
+                    <div class="button-center">
+                      <ion-button size="small" [fill]='solid' (click)="readFile()">
+                        Read File
+                      </ion-button>
+                    </div>
+                  </ion-col>
+                </ion-row>
+              </form>
+            </ion-grid>
+
+          </div>
+        </div>
+
+        <div *ngIf="segmentView == 's2'">
+          <div class="ion-padding segmentContent">
+            <ion-grid fixed *ngIf="apiMessage">
+              <form [formGroup]="reviewGroup">
+                <ion-row style="text-align: center;">
+                  <ion-col size='6' size-md='5' size-lg='6'>
+                    <ion-item>
+                      <ion-label position="floating">Start Row</ion-label>
+                      <ion-input formControlName="startRow" type="number" min='1' value=''></ion-input>
+                    </ion-item>
+                  </ion-col>
+
+                  <ion-col size='6' size-md='5' size-lg='6'>
+                    <ion-item>
+                      <ion-label position="floating">Start Column</ion-label>
+                      <ion-input formControlName="startCol" type="number" min='1' value=''></ion-input>
+                    </ion-item>
+                  </ion-col>
+                </ion-row>
+
+                <ion-row>
+                  <ion-col size='12' size-md='10' size-lg='12'>
+                    <div>
+                      <label>
+                        Map Datatable
+                      </label>
+                    </div>
+                  </ion-col>
+                  <!-- Table here -->
+                  <ion-col size='12' size-md='10' size-lg='12' style="overflow-x: scroll">
+                    <table>
+                      <ng-container formArrayName="Properties">
+                        <tr>
+                          <td style="min-width: 90px;"></td>
+                          <td *ngFor="let newProperty of Properties.controls; let i = index">
+                            <ng-container [formGroup]="newProperty">
+                              <ion-select placeholder="Select One" formControlName="property" interface="popover">
+                                <ion-select-option value="None">None</ion-select-option>
+                                <ion-select-option [value]="j" *ngFor="let i of chooseProperties; let j = index">
+                                  {{i}}
+                                </ion-select-option>
+                              </ion-select>
+                            </ng-container>
+                          </td>
+                        </tr>
+                      </ng-container>
+
+                      <tr>
+                        <td>Row | Col</td>
+                        <ng-container *ngFor="let c of alphabetList">
+                          <td>{{c}}</td>
+                        </ng-container>
+                      </tr>
+
+                      <!-- New VERSION || Dynamic Table -->
+                      <!-- Đảm nhiệm việc render số cột tương ứng trên giao diện của client (Part 2 - HTML file). -->
+                      <tr *ngFor="let i of apiMessage">
+                        <ng-container *ngFor="let key of keys">
+                          <td [ngClass]=" ( i[key] == null && isValidated == true ) ? 'danger-cell' : 'nor-cell' "
+                            [attr.title]=" i[key] == null ? 'Cell is empty!' : '' ">
+                            {{i[key]}}
+                          </td>
+                        </ng-container>
+                      </tr>
+                    </table>
+                  </ion-col>
+                </ion-row>
+
+                <ion-row>
+                  <ion-col size='6' size-md='6' size-lg='6' style="display: flex; justify-content: center;">
+                    <div class="button-center">
+                      <ion-button size="small" [fill]='solid' (click)="checkValidate()">
+                        Validate
+                      </ion-button>
+                    </div>
+
+                    <div class="button-center">
+                      <ion-button size="small" [fill]='solid' (click)="importAnyway()">
+                        Import Anyway
+                      </ion-button>
+                    </div>
+                  </ion-col>
+                </ion-row>
+
+                <ion-row>
+                  <ion-col size='6' size-md='6' size-lg='6' style="display: flex; justify-content: center;">
+                    <div class="button-center">
+                      <ion-button size="small" [fill]='solid' (click)="submitAnyway()">
+                        Import
+                      </ion-button>
+                    </div>
+                  </ion-col>
+                </ion-row>
+
+
+              </form>
+            </ion-grid>
+
+            <ion-grid fixed *ngIf="!apiMessage">
+              <ion-row>
+                <ion-col size='12' size-md='10' size-lg='8'>
+                  Please read your file first!
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+
+          </div>
+        </div>
+
+        <div *ngIf="segmentView == 's3'">
+          <div class="ion-padding segmentContent" style="flex-direction: column; text-align: center;">
+
+            <ion-grid fixed *ngIf="apiMessage">
+              <ion-row>
+                <ion-col size='6' size-md='6' size-lg='6' style="display: flex; flex-direction: column; justify-content: center;">
+                  <div>{{canSave}} objects saved successfully! </div>
+                  <div>{{canNot}} objects failed to save! </div>
+                  <div class="button-center">
+                    <ion-button *ngIf="failedData.length != 0" size="small" [fill]='solid' (click)="downloadExcelFile()">
+                      Download file
+                    </ion-button>
+                  </div>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</ion-content>

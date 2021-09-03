@@ -147,7 +147,7 @@ export class ShowDepComponent implements OnInit {
   }
 
   accept() {
-    this.loading.presentLoading();
+    // this.loading.presentLoading();
     
     // seperate this between add new or edit existing.
     if (this.modalType == 'add') {

@@ -54,6 +54,7 @@ export class SharedModalPage implements OnInit {
   @Input() LevelNameList: any;
   @Input() IngredientList: any;
   @Input() RecipeID: any;
+  @Input() IngredientID: any;
   @Input() Title: any;
   @Input() ImageName: any;
   @Input() ImageNamePath: any;
@@ -93,14 +94,37 @@ export class SharedModalPage implements OnInit {
     isViewRecipe: false,
     ViewRecipeLabel: 'View Recipe',
 
+    isAddRecipe: false,
+    AddRecipeLabel: 'Add Recipe',
+
     isEditRecipe: false,
     EditRecipeLabel: 'Edit Recipe',
+
+    isAddIngredient: false,
+    AddIngredientLabel: 'Add Ingredient',
+
+    isEditIngredient: false,
+    EditIngredientLabel: 'Edit Ingredient',
+
+    isAddCuisine: false,
+    AddCuisineLabel: 'Add Cuisine',
+
+    isEditCuisine: false,
+    EditCuisineLabel: 'Add Cuisine',
+
+    isCookMeal: false,
+    CookMealLabel: 'Cooking Meal',
   }
 
   buttonValue;
   CuisineName;
   LevelName;
+  IngredientName;
+  IngredientsID: any = []
   RecipeIngredientList: any = [];
+  SelectedCuisineName;
+  SelectedLevelName;
+  SelectedIngredientName;
 
   constructor(
     public modalController: ModalController,
@@ -112,14 +136,12 @@ export class SharedModalPage implements OnInit {
   ngOnInit() {
     this.modalConfig = Object.assign(this._modalConfig, this.modalConfig);
 
-    if ( this._modalConfig.isViewRecipe == true || this._modalConfig.isEditRecipe == true ) {
-      let c = this.CuisineList.find(o => o.cCuisineID === this.CuisineID);
-      this.CuisineName = c.cCuisine;
 
-      let l = this.LevelList.find(o => o.lLevelID === this.LevelID);
-      this.LevelName = l.lLevelName;
-
+    if (this._modalConfig.isEditRecipe == true || this._modalConfig.isViewRecipe == true) {
       this.loadRecipeIngreList();
+    }
+    else {
+      this.assignRecipes();
     }
   }
 
@@ -128,15 +150,47 @@ export class SharedModalPage implements OnInit {
 
     this.tab11service.GetRecipeIngredients(val).subscribe(res => {
       for (let i = 0; i < res.length; i++) {
-
-      let ri = this.IngredientList.find(o => o.iIngredientID === res[i].riIngredientID);
-      this.RecipeIngredientList.push(ri.iIngredient)
+        let ri = this.IngredientList.find(o => o.iIngredientID === res[i].riIngredientID);
+        this.RecipeIngredientList.push(ri.iIngredient)
       };
+      this.assignRecipes();
     });
-    debugger
   }
 
+  async assignRecipes() {
+    
+    if (this._modalConfig.isViewRecipe == true) {
+      let c = this.CuisineList.find(o => o.cCuisineID === this.CuisineID);
+      this.CuisineName = c.cCuisine;
 
+      let l = this.LevelList.find(o => o.lLevelID === this.LevelID);
+      this.LevelName = l.lLevelName;
+
+    }
+
+    else if (this._modalConfig.isAddRecipe == true) {
+
+      this.CuisineName = this.CuisineList;
+      this.LevelName = this.LevelList;
+      this.IngredientName = this.IngredientList;
+
+    }
+
+    else if ( this._modalConfig.isEditRecipe == true ) {
+
+      this.CuisineName = this.CuisineList;
+      this.LevelName = this.LevelList;
+      this.IngredientName = this.IngredientList;
+
+      let c = this.CuisineList.find(o => o.cCuisineID === this.CuisineID);
+      this.SelectedCuisineName = c.cCuisine;
+
+      let l = this.LevelList.find(o => o.lLevelID === this.LevelID);
+      this.SelectedLevelName = l.lLevelName;
+
+      this.SelectedIngredientName = this.RecipeIngredientList;
+    }
+  }
 
   uploadPhoto(event) {
     debugger
@@ -144,16 +198,24 @@ export class SharedModalPage implements OnInit {
     const formData: FormData = new FormData();
     formData.append('uploadedFile', file, file.name);
 
-    if ( this._modalConfig.isAddEmp == true || this._modalConfig.isEditEmp == true ) {
-    this.tab9service.UploadPhoto(formData).subscribe((data: any) => {
-      this.PhotoFileName = data.toString();
-      this.PhotoFilePath = (this.tab9service.PhotoUrl + this.PhotoFileName).toString();
-    });
+    if (this._modalConfig.isAddEmp == true || this._modalConfig.isEditEmp == true) {
+      this.tab9service.UploadPhoto(formData).subscribe((data: any) => {
+        this.PhotoFileName = data.toString();
+        this.PhotoFilePath = (this.tab9service.PhotoUrl + this.PhotoFileName).toString();
+      });
     }
-    else if ( this._modalConfig.isViewRecipe == true || this._modalConfig.isEditRecipe == true ) {
+    else if (this._modalConfig.isAddRecipe == true || this._modalConfig.isEditRecipe == true) {
       this.tab11service.UploadRecipeImage(formData).subscribe((data: any) => {
         this.ImageName = data.toString();
         this.ImageNamePath = (this.tab11service.RecipesUrl + this.ImageName).toString();
+        debugger
+      });
+    }
+
+    else if (this._modalConfig.isAddIngredient == true || this._modalConfig.isEditIngredient == true) {
+      this.tab11service.UploadIngredientImage(formData).subscribe((data: any) => {
+        this.ImageName = data.toString();
+        this.ImageNamePath = (this.tab11service.IngredientsUrl + this.ImageName).toString();
         debugger
       });
     }
@@ -168,6 +230,32 @@ export class SharedModalPage implements OnInit {
     this.buttonValue = 'accept';
     this.dismiss();
   }
+
+
+  changeCuisine(ev: any) {
+    let c = this.CuisineList.find(o => o.cCuisine === this.SelectedCuisineName);
+    this.CuisineID = c.cCuisineID;
+
+    debugger
+  }
+
+  changeLevel(ev: any) {
+    let l = this.LevelList.find(o => o.lLevelName === this.SelectedLevelName);
+    this.LevelID = l.lLevelID;
+
+    debugger
+  }
+
+  changeIngredient(ev: any) {
+    for (let i = 0; i < this.SelectedIngredientName.length; i++) {
+
+      let ig = this.IngredientList.find(o => o.iIngredient === this.SelectedIngredientName[i]);
+
+      this.IngredientsID.push(ig.iIngredientID);
+    }
+    debugger
+  }
+
 
   //fix this! Seperate out!
   dismiss() {
@@ -211,7 +299,69 @@ export class SharedModalPage implements OnInit {
       });
     }
 
-    else {
+    else if ( this._modalConfig.isAddRecipe == true || this._modalConfig.isEditRecipe == true ) {
+      this.modalController.dismiss({
+        modalValue:       this.buttonValue,
+        modalType:        this.modalType,
+
+        RecipeID:         this.RecipeID,
+        Title:            this.Title,
+        Description:      this.Description,
+        ImageName:        this.ImageName,
+        CuisineID:        this.CuisineID,
+        PrepTime:         this.PrepTime,
+        CookTime:         this.CookTime,
+        ReadyIn:          this.ReadyIn,
+        LevelID:          this.LevelID,
+        Rating:           this.Rating,
+        IngredientID:     this.IngredientsID,
+      });
+    }
+
+    else if ( this._modalConfig.isViewRecipe == true ) {
+      this.modalController.dismiss({
+        modalValue:       this.buttonValue,
+        modalType:        this.modalType,
+
+        RecipeID:         this.RecipeID,
+        Title:            this.Title,
+        Description:      this.Description,
+        ImageName:        this.ImageName,
+        CuisineID:        this.CuisineID,
+        PrepTime:         this.PrepTime,
+        CookTime:         this.CookTime,
+        ReadyIn:          this.ReadyIn,
+        LevelID:          this.LevelID,
+        Rating:           this.Rating,
+        IngredientID:     this.IngredientsID,
+      });
+    }
+
+    else if ( this._modalConfig.isAddIngredient == true || this._modalConfig.isEditIngredient == true ) {
+      this.modalController.dismiss({
+        modalValue:       this.buttonValue,
+        modalType:        this.modalType,
+
+        IngredientID:     this.IngredientID,
+        Title:            this.Title,
+        Description:      this.Description,
+        ImageName:        this.ImageName,
+      });
+    }
+
+    else if ( this._modalConfig.isAddCuisine == true || this._modalConfig.isEditCuisine == true ) {
+      this.modalController.dismiss({
+        modalValue:       this.buttonValue,
+        modalType:        this.modalType,
+
+        CuisineID:        this.CuisineID,
+        Title:            this.Title,
+        Description:      this.Description,
+        ImageName:        this.ImageName,
+      });
+    }
+
+    else if ( this._modalConfig.isCookMeal == true) {
       this.modalController.dismiss({
         modalValue:       this.buttonValue,
         modalType:        this.modalType,

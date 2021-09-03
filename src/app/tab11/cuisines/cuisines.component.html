@@ -2,29 +2,28 @@
   <ion-row style="display: flex;">
     <ion-col size='10'>
       <ion-item>
-      <ion-label position='floating'>
-        Search for Cuisine!
-      </ion-label>
-      <ion-input>
+        <ion-label position='floating'>
+          Search for Cuisine!
+        </ion-label>
+        <ion-input>
 
-      </ion-input>
-    </ion-item>
+        </ion-input>
+      </ion-item>
     </ion-col>
     <ion-col size='2' style="display: flex;">
-      <ion-button style="margin: auto;">
+      <ion-button style="margin: auto;" (click)="presentModal()">
         <ion-icon name="add"></ion-icon>
       </ion-button>
     </ion-col>
   </ion-row>
 </ion-grid>
 
-
 <div class="scroll-list">
   <ion-list>
     <ion-item-sliding *ngFor="let item of CuisineList, let i = index">
       <ion-item>
         <ion-thumbnail slot="start">
-          <img src="https://i.insider.com/5d4203fb36e03c28a1020308?width=700" />
+          <img src="{{ImageNamePath[i]}}" />
         </ion-thumbnail>
 
         <div class="item-content">
@@ -34,7 +33,7 @@
       </ion-item>
 
       <ion-item-options side="end">
-        <ion-item-option (click)="Edit(item)">Edit</ion-item-option>
+        <ion-item-option (click)="presentEditModal(item)">Edit</ion-item-option>
       </ion-item-options>
     </ion-item-sliding>
   </ion-list>

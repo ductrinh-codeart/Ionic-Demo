@@ -58,6 +58,31 @@
 </ion-slides>
 
 <!-- Half-below -->
-<div class="upper-part">
+<div class="lower-part">
+  <ion-card class="HoverOn">
+    <ion-card-header>
+      <ion-thumbnail>
+        <img *ngIf="ImageNamePath" src={{ImageNamePath[RandomNumber-1]}} />
+      </ion-thumbnail>
+    </ion-card-header>
+
+    <ion-card-content class="item-content">
+      <div class="card-subtitle"><small >Dish for today is ...</small></div>
+      <div class="random-number" *ngIf="RandomNumber">{{RandomNumber}}</div>
+      <div class="random-name" *ngIf="RandomName">{{RandomName}}</div>
+    </ion-card-content>
+  </ion-card>
+
+  <div class="ShowOnHover">
+    <div style="display: flex;">
+      <div class="choice-button roll" (click)="getRandomInt()">
+          <span>Re-roll</span>
+      </div>
+
+      <div class="choice-button cook" (click)="presentCookModal(RandomName)">
+          <span>Let's Cook!</span>
+      </div>
+    </div>
+  </div>
 
 </div>

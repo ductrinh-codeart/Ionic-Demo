@@ -2,8 +2,12 @@ ion-slides {
     height:50%;
 }
 
-.upper-part {
+.lower-part {
     height: 50%;
+    ion-card {
+        width: 350px;
+        margin: 0 auto;
+    }
 }
 
 ion-card {
@@ -33,9 +37,56 @@ ion-card-content {
     .card-title {
         font-weight: bold;
     }
+    .random-number {
+        font-weight: bold;
+        text-align: center;
+        font-size: 2.5rem;
+        color: red;
+    }
+    .random-name {
+        font-weight: bold;
+        text-align: center;
+    }
     .card-description {
         text-overflow: ellipsis;
         white-space: nowrap;
         overflow: hidden;
+    }
+}
+
+.ShowOnHover {
+    visibility: hidden;  
+    opacity: 0;
+    transition: visibility 0s, opacity 0.25s ease-in-out;
+    margin: 0 auto;
+    width: 350px;
+}
+
+.HoverOn:hover + .ShowOnHover{
+    visibility: visible;
+    opacity: 1;
+}
+
+.ShowOnHover:hover {
+    visibility: visible;
+    opacity: 1;
+}
+
+.choice-button {
+    margin: 0 auto;
+    width: 100px;
+    line-height: 50px;
+    vertical-align: middle;
+    text-align: center;
+    border-radius: 0 0 10px 10px;
+    cursor: pointer;
+
+    &.roll {
+        background-color: #ffc409;
+        color: black;
+    }
+    &.cook {
+        background-color: #2dd36f;
+        color: white;
     }
 }
